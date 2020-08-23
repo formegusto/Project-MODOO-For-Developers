@@ -1,0 +1,174 @@
+html {
+	height: 100%;
+	display: flex;
+}
+
+body {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	animation: fadeIn 1.5s;
+}
+
+/* account class style */
+.logoBox {
+	flex: 2;
+	background: black;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	animation: aniLogoBox 2s; 
+}
+
+.inputBox {
+	flex: 3;
+	display: flex;
+	align-items: center;
+}
+
+.logoForm {
+	margin: 5rem;
+	font-size: 2rem;
+	color: white;
+	text-align: right;
+	padding: 1.5rem;
+	border-radius: 1rem;
+	box-shadow: 1rem .5rem .5rem gray;
+}
+
+.logoForm span {
+	margin-right: 30%;
+}
+
+.logoForm:hover {
+	transform: translateY(-7px);
+	transition: .3s;
+}
+
+.inputFormBox {
+	display: flex;
+	flex-direction: column;
+	width: 40%;
+	margin: 5rem;
+}
+
+.inputNav {
+	display: flex;
+	flex-direction: row;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.inputNav li {
+	z-index: 2;
+	cursor: pointer;
+	flex: 1;
+	text-align: center;
+	border: 1px solid black;
+	background: black;
+	color: white;
+	border-top-left-radius: 1rem;
+	border-top-right-radius: 1rem;
+	padding: 10px;
+}
+
+.inputNav li#signinLi{
+	transform: translateY(-5px);
+	transition: "1s";
+}
+
+.inputNav li#signupLi{
+	transform: translateY(5px);
+	transition: "1s";
+}
+
+.inputNav li:hover {
+	opacity: .3;
+	transition: 0.5s ease-in;
+}
+
+.inputForm {
+	z-index: 1;
+	display: flex;
+    flex-direction: column;
+    border-right : solid black;
+    border-left : solid black;
+    border-bottom : solid black;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 2rem;
+    margin-top: 0px;
+    box-shadow: .5rem .25rem .25rem 0 black;
+    transition: 1.5s ease-in;
+}
+
+.inputForm label {
+	color: black;
+    margin-bottom: 3px;
+}
+
+.inputForm input {
+	border-color: slategray;
+    border-width: .1rem;
+    border-radius: .5rem;
+    margin-bottom: 10px;
+    font-size: 15px;
+    padding: 1rem;
+    outline: none;
+}
+
+.inputForm input:focus {
+	border-width: .4rem;
+    transition: .3s ease-in;
+}
+
+.inputForm button {
+	background: black;
+    color: white;
+    margin-top: 10px;        
+    font-size: 20px;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    outline: none;
+}
+
+.inputForm button:hover {
+	opacity: .3;
+    transition: 0.5s ease-in;	
+}
+
+
+/* animation keyframe */
+@keyframes fadeIn {
+	from {
+		opacity:0;
+	}
+	to {
+		opacity:1;
+	}
+}
+
+@keyframes aniLogoBox {
+	from {
+		margin-right: 15rem;
+	}
+	to {
+		margin-right: 0;
+	}
+}
+
+/* media setting */
+@media (max-width: 1100px) {
+	body {
+		flex-direction: column;
+	}
+	.logoBox {
+		justify-content: center;
+	}
+	.inputBox {
+		justify-content: center;
+		animation: aniLogoBox 2s;
+	}
+}
