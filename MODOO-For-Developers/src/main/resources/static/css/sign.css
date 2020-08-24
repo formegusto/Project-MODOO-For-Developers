@@ -73,12 +73,12 @@ body {
 	padding: 10px;
 }
 
-.inputNav li#signinLi{
+.inputNav li.active{
 	transform: translateY(-5px);
 	transition: "1s";
 }
 
-.inputNav li#signupLi{
+.inputNav li.unactive{
 	transform: translateY(5px);
 	transition: "1s";
 }

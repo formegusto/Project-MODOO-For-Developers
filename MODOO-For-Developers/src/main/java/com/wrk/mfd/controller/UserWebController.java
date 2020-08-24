@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/user")
 public class UserWebController {
-	@GetMapping("/login")
-	public String login() {
-		return "login";
+	@GetMapping("/signin")
+	public String signin() {
+		return "signin";
+	}
+	@GetMapping("/signup")
+	public String signup() {
+		return "signup";
 	}
 }

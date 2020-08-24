@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width">
-<link rel="stylesheet" th:href="@{/static/css/login.css}" href="/static/css/login.css" type="text/css"></link>
+<link rel="stylesheet" th:href="@{/static/css/sign.css}" href="/static/css/login.css" type="text/css"></link>
 <title>MODOO For Developers</title>
 </head>
 <body>
 	<div class="logoBox">
 		<div class="logoForm">
-			Management<br/>
-			<span>Of Data</span><br/>
-			Our Ours
+			MODOO<br/>
+			<span>For</span><br/>
+			Developers
 		</div>
 	</div>
 	<div class="inputBox">
 		<div class="inputFormBox">
 			<ul class="inputNav">
-				<li id="signinLi" onClick="onChangeInputType(this,'signin')">Sign-In</li>
-				<li id="signupLi" onClick="onChangeInputType(this,'signup')">Sign-Up</li>
+				<li class="active" onClick="location.href='/user/signin'">Sign-In</li>
+				<li class="unactive" onClick="location.href='/user/signup'">Sign-Up</li>
 			</ul>
 			<form class="inputForm" id="signinForm" 
-					method="post" action="signin.do">
+					method="post" action="signup">
 				<label>ID</label>
 				<input type="text" name="id" placeholder="ID"/>
 				<label>PASSWORD</label>
