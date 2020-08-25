@@ -17,16 +17,16 @@
 	<div class="inputBox">
 		<div class="inputFormBox">
 			<ul class="inputNav">
-				<li class="active" onClick="location.href='/user/signin'">Sign-In</li>
-				<li class="unactive" onClick="location.href='/user/signup'">Sign-Up</li>
+				<li class="unactive" id="signinLi" onClick="location.href='/user/signin'">Sign-In</li>
+				<li class="active" onClick="location.href='/user/signup'">Sign-Up</li>
 			</ul>
 			<form class="inputForm" id="signinForm" 
-					method="post" action="signup">
+					method="post" th:action="@{/user/signup/do}">
 				<label>ID</label>
 				<input type="text" name="id" placeholder="ID"/>
 				<label>PASSWORD</label>
 				<input type="password" name="password" placeholder="PASSWORD"/>
-				<button type="submit">Sign In</button>
+				<button type="submit">Sign Up</button>
 			</form>
 		</div>
 	</div>

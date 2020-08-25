@@ -3,6 +3,6 @@
 
 <configuration>
 	<typeAliases>
-		
+		<typeAlias type="com.wrk.mfd.entity.User" alias="user"></typeAlias>
 	</typeAliases>
 </configuration>

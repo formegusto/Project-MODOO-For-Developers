@@ -3,14 +3,18 @@
 	PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="com.wrk.mfd.repository.UserRepository">
-		<select id="signinUser" resultType="com.wrk.mfd.entity.User">
-			SELECT * 
+		<select id="readUser" resultType="user">
+			SELECT id, role
 			FROM MFD_USER
 			WHERE ID=#{id}
-			AND PASSWORD=#{password}
+		</select>
+		<select id="findUserById" resultType="user">
+			SELECT *
+			FROM MFD_USER
+			WHERE ID=#{username}
 		</select>
 		<insert id="signupUser">
-			INSERT INTO MFD_USER(id, password, role)
-			VALUES(#{id}, #{password}, #{role})
+			INSERT INTO MFD_USER(id, password)
+			VALUES(#{id}, #{password})
 		</insert>
 	</mapper>

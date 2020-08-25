@@ -6,6 +6,7 @@ import com.wrk.mfd.entity.User;
 
 @Mapper
 public interface UserRepository {
-	public User signinUser(User vo);
+	public User readUser(User vo);
+	public User findUserById(String username);
 	public void signupUser(User vo);
 }

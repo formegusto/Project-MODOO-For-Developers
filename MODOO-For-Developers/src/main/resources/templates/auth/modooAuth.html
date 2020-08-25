@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" th:href="@{/static/css/modooAuth.css}" href="/static/css/login.css" type="text/css"></link>
+<title>MODOO For Developers</title>
+</head>
+<script>
+	alert("MODOO 서비스 인증 후 이용해주세요!");
+</script>
+<body>
+	<form class="inputForm" id="signinForm" 
+			method="post" th:action="@{/user/signin/do}">
+		<div class="formHeader">
+			MODOO Account Auth
+		</div>
+		<label>ID</label>
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<input type="text" name="username" placeholder="ID"/>
+		<label>PASSWORD</label>
+		<input type="password" name="password" placeholder="PASSWORD"/>
+		<button type="submit">Auth In</button>
+	</form>
+</body>
+</html>

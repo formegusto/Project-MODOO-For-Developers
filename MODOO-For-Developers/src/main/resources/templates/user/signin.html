@@ -17,16 +17,17 @@
 	<div class="inputBox">
 		<div class="inputFormBox">
 			<ul class="inputNav">
-				<li class="unactive" id="signinLi" onClick="location.href='/user/signin'">Sign-In</li>
-				<li class="active" onClick="location.href='/user/signup'">Sign-Up</li>
+				<li class="active" onClick="location.href='/user/signin'">Sign-In</li>
+				<li class="unactive" onClick="location.href='/user/signup'">Sign-Up</li>
 			</ul>
 			<form class="inputForm" id="signinForm" 
-					method="post" th:action="@{/user/api/signup}">
+					method="post" th:action="@{/user/signin/do}">
 				<label>ID</label>
-				<input type="text" name="id" placeholder="ID"/>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input type="text" name="username" placeholder="ID"/>
 				<label>PASSWORD</label>
 				<input type="password" name="password" placeholder="PASSWORD"/>
-				<button type="submit">Sign Up</button>
+				<button type="submit">Sign In</button>
 			</form>
 		</div>
 	</div>
