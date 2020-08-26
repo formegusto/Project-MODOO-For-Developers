@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/static/css/agreement.css}" type="text/css"></link>
+<script type="text/javascript" th:src="@{/static/js/agreement.js}"></script>
+<title>MODOO For Developers</title>
+</head>
+<body>
+	<form name="form" method="post" th:action="@{/auth/modooAuth/register}" class="agreement">
+		<input type="hidden" name="id" th:value="${muser.id}"/>
+		<div class="agreementTitle">
+			<span th:text="${muser.id}"></span>님 반갑습니다.<br/> 
+			사용전에 확인 해주세요.
+		</div>
+		<hr/>
+		<div class="agreeContent">
+			<label for="agree_1">인증에 사용된 계정은 다음에 다른 계정의 인증에 사용될 수 없습니다.</label>
+			<input type="button" class="agreeCheck" id="agree_1" onclick="onCheck(this)"/>
+		</div>
+		<div class="agreeContent">
+			<label for="agree_2">API Key가 자동으로 발급됩니다. 메인페이지에서 확인해주세요.</label>
+			<input type="button" class="agreeCheck" id="agree_2" onclick="onCheck(this)"/>
+		</div>
+		<div class="agreeContent">
+			<button type="button" class="cancle" onclick="location.href='/auth/modooAuth'">취소</button>
+			<button type="button" class="agree" onclick="onSubmit()">확인</button>
+		</div>
+	</form>
+</body>
+</html>

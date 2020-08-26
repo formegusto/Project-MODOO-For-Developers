@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width">
-<link rel="stylesheet" th:href="@{/static/css/modooAuth.css}" href="/static/css/login.css" type="text/css"></link>
+<link rel="stylesheet" th:href="@{/static/css/modooAuth.css}" type="text/css"></link>
 <title>MODOO For Developers</title>
 </head>
 <script>
@@ -11,13 +11,12 @@
 </script>
 <body>
 	<form class="inputForm" id="signinForm" 
-			method="post" th:action="@{/user/signin/do}">
+			method="post" th:action="@{/auth/modooAuth}">
 		<div class="formHeader">
-			MODOO Account Auth
+			MODOO 계정을 입력해주세요!
 		</div>
 		<label>ID</label>
-		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		<input type="text" name="username" placeholder="ID"/>
+		<input type="text" name="id" placeholder="ID"/>
 		<label>PASSWORD</label>
 		<input type="password" name="password" placeholder="PASSWORD"/>
 		<button type="submit">Auth In</button>

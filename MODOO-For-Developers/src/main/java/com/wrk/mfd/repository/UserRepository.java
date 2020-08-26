@@ -9,4 +9,5 @@ public interface UserRepository {
 	public User readUser(User vo);
 	public User findUserById(String username);
 	public void signupUser(User vo);
+	public void authRegister(User vo);
 }

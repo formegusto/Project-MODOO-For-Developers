@@ -16,6 +16,8 @@ import com.wrk.mfd.service.CustomUserDetailService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private CustomUserDetailService customUserDetailService;
+	@Autowired
+	private LoginSuccessHandler loginSuccessHandler;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -55,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.loginPage("/user/signin")
 				.loginProcessingUrl("/user/signin/do")
 				.defaultSuccessUrl("/authCheck")
+				.successHandler(loginSuccessHandler)
 				.permitAll();
 	}
 	

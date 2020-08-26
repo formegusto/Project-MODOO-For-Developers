@@ -23,7 +23,6 @@
 			<form class="inputForm" id="signinForm" 
 					method="post" th:action="@{/user/signin/do}">
 				<label>ID</label>
-				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				<input type="text" name="username" placeholder="ID"/>
 				<label>PASSWORD</label>
 				<input type="password" name="password" placeholder="PASSWORD"/>

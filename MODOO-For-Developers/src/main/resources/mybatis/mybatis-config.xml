@@ -4,5 +4,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.wrk.mfd.entity.User" alias="user"></typeAlias>
+		<typeAlias type="com.wrk.mfd.entity.ModooUser" alias="muser"></typeAlias>
+		<typeAlias type="com.wrk.mfd.entity.Key" alias="key"></typeAlias>
 	</typeAliases>
 </configuration>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.wrk.mfd.repository.KeyRepository">
+		<insert id="registerKey">
+			INSERT INTO MFD_KEY (user_id,apikey)
+			VALUES(#{user_id},#{apikey})
+		</insert>
+		<select id="checkApikey" resultType="boolean">
+			SELECT EXISTS(
+				SELECT apikey
+				FROM MFD_KEY
+				WHERE APIKEY=#{apikey}
+			) as chkkey
+		</select>
+		<select id="getApikey" resultType="key">
+			SELECT *
+			FROM MFD_KEY
+			WHERE USER_ID=#{user_id}
+		</select>
+	</mapper>
