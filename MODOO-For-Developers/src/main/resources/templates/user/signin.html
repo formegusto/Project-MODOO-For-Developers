@@ -9,24 +9,22 @@
 <body>
 	<div class="logoBox">
 		<div class="logoForm">
-			MODOO<br/>
-			<span>For</span><br/>
-			Developers
+			MODOO For Developers
 		</div>
 	</div>
 	<div class="inputBox">
 		<div class="inputFormBox">
 			<ul class="inputNav">
-				<li class="active" onClick="location.href='/user/signin'">Sign-In</li>
-				<li class="unactive" onClick="location.href='/user/signup'">Sign-Up</li>
+				<li class="active" onClick="location.href='/user/signin'">로그인</li>
+				<li class="unactive" onClick="location.href='/user/signup'">회원가입</li>
 			</ul>
 			<form class="inputForm" id="signinForm" 
 					method="post" th:action="@{/user/signin/do}">
-				<label>ID</label>
-				<input type="text" name="username" placeholder="ID"/>
-				<label>PASSWORD</label>
-				<input type="password" name="password" placeholder="PASSWORD"/>
-				<button type="submit">Sign In</button>
+				<label>아이디</label>
+				<input type="text" name="username" placeholder=""/>
+				<label>비밀번호</label>
+				<input type="password" name="password" placeholder=""/>
+				<button type="submit">로그인</button>
 			</form>
 		</div>
 	</div>
