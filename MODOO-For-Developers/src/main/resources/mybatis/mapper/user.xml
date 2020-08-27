@@ -4,9 +4,16 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="com.wrk.mfd.repository.UserRepository">
 		<select id="readUser" resultType="user">
-			SELECT seq,id, role
+			SELECT seq, id, role, modoo_id
 			FROM MFD_USER
-			WHERE ID=#{id}
+			<where>
+	            <if test="seq != 0">
+	                AND SEQ = #{seq}
+		        </if>
+		        <if test="id != null and !id.equals('')">
+		            AND ID = #{id}
+		         </if>
+	    	</where>
 		</select>
 		<select id="findUserById" resultType="user">
 			SELECT *

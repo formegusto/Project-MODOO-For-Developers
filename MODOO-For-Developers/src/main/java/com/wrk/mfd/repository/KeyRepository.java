@@ -9,4 +9,5 @@ public interface KeyRepository {
 	public void registerKey(Key vo);
 	public Boolean checkApikey(String apikey);
 	public Key getApikey(Key vo);
+	public int readUserId(String apikey);
 }

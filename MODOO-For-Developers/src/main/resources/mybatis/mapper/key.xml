@@ -19,4 +19,9 @@
 			FROM MFD_KEY
 			WHERE USER_ID=#{user_id}
 		</select>
+		<select id="readUserId" resultType="Integer">
+			SELECT user_id
+			FROM MFD_KEY
+			WHERE APIKEY=#{apikey}
+		</select>
 	</mapper>

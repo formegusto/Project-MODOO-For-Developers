@@ -5,6 +5,10 @@
 	<typeAliases>
 		<typeAlias type="com.wrk.mfd.entity.User" alias="user"></typeAlias>
 		<typeAlias type="com.wrk.mfd.entity.ModooUser" alias="muser"></typeAlias>
+		<typeAlias type="com.wrk.mfd.entity.ModooInfo" alias="minfo"></typeAlias>
+		<typeAlias type="com.wrk.mfd.entity.ModooData" alias="mdata"></typeAlias>
+		<typeAlias type="com.wrk.mfd.entity.ModooFrame" alias="mframe"></typeAlias>
+		<typeAlias type="com.wrk.mfd.entity.ModooFHI" alias="mfhi"></typeAlias>
 		<typeAlias type="com.wrk.mfd.entity.Key" alias="key"></typeAlias>
 	</typeAliases>
 </configuration>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.wrk.mfd.repository.MinfoRepository">
+		<select id="readMinfo" resultType="minfo">
+			SELECT iseq, field
+			FROM INFO
+			<where>
+					<if test="iseq != 0">
+		                AND ISEQ = #{iseq}
+			        </if>
+			        <if test="id != null and !id.equals('')">
+			            AND ID = #{id}
+			         </if>
+			</where>
+		</select>
+		<select id="checkSeq" resultType="boolean">
+			SELECT EXISTS(
+				SELECT *
+				FROM INFO
+				<where>
+					<if test="iseq != 0">
+		                AND ISEQ = #{iseq}
+			        </if>
+			        <if test="id != null and !id.equals('')">
+			            AND ID = #{id}
+			         </if>
+				</where>
+			) as chkseq
+		</select>
+	</mapper>

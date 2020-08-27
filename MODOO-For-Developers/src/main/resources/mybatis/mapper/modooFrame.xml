@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.wrk.mfd.repository.MframeRepository">
+		<select id="readMframe" resultType="mframe">
+			SELECT fseq
+			FROM FRAME
+			WHERE ID=#{id}
+			AND FSEQ=#{fseq}
+		</select>
+		<select id="checkSeq" resultType="boolean">
+			SELECT EXISTS(
+				SELECT *
+				FROM FRAME
+				<where>
+					<if test="fseq != 0">
+		                AND FSEQ = #{fseq}
+			        </if>
+			        <if test="id != null and !id.equals('')">
+			            AND ID = #{id}
+			         </if>
+				</where>
+			) as chkseq
+		</select>
+		<select id="readFHI" resultType="mfhi">
+			SELECT *
+			FROM FRAME_HAVE_INFO
+			WHERE FSEQ=#{fseq}
+		</select>
+	</mapper>

@@ -1,25 +1,31 @@
 package com.wrk.mfd.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.wrk.mfd.entity.RequestDTO;
+import com.wrk.mfd.service.ApiService;
 
 @RestController
 @RequestMapping("/api")
 public class RestApiController {
-	@RequestMapping("/test")
-	public Map<String, Object> test(String apikey) {
-		Map<String, Object> returnMap = new HashMap<>();
-				
-		if(apikey.equals("test")) {
-			{
-				returnMap.put("result", "0");
-				returnMap.put("value", "권한이 없는 apikey 입니다.");
-			}
-		}
+	@Autowired
+	private ApiService apiService;
+	
+	@RequestMapping("/info")
+	public Map<String, Object> info(RequestDTO reqDTO) {
+		System.out.println(reqDTO);
 		
-		return returnMap;
+		return apiService.readInfoData(reqDTO);
+	}
+	
+	@RequestMapping("/frame")
+	public Map<String, Object> frame(RequestDTO reqDTO) {
+		System.out.println(reqDTO);
+		
+		return apiService.readFrameData(reqDTO);
 	}
 }
