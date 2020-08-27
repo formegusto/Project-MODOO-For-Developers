@@ -21,4 +21,48 @@
 			WHERE MSEQ=#{mseq}
 			AND TYPE=#{type}
 		</update>
+		<select id="readReq" resultType="req">
+			SELECT *
+			FROM MFD_REQUEST
+			<where>
+				TYPE=#{type}
+				<if test="type.equals('info')">
+				AND MSEQ IN (
+					SELECT iseq
+					FROM INFO
+					WHERE ID=#{user_id}
+				)
+				</if>
+				<if test="type.equals('frame')">
+				AND MSEQ IN (
+					SELECT fseq
+					FROM FRAME
+					WHERE ID=#{user_id}
+				)
+				</if>
+			</where>
+			ORDER BY cnt DESC LIMIT 5;
+		</select>
+		<select id="readMinfo" resultType="req">
+			SELECT I.iseq seq, I.title, MR.cnt
+			FROM INFO AS I
+			LEFT OUTER JOIN (
+				SELECT *
+				FROM MFD_REQUEST
+				WHERE TYPE='info'
+			) AS MR
+				ON I.iseq = MR.mseq
+			WHERE ID=#{id}
+		</select>
+		<select id="readMframe" resultType="req">
+			SELECT F.fseq seq, F.title, MR.cnt
+			FROM FRAME AS F
+			LEFT OUTER JOIN (
+				SELECT *
+				FROM MFD_REQUEST
+				WHERE TYPE='frame'
+			) AS MR
+				ON F.fseq = MR.mseq
+			WHERE ID=#{id}
+		</select>
 	</mapper>

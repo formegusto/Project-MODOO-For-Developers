@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" th:href="@{/static/css/datamgmt.css}" type="text/css"></link>
+<script type="text/javascript" th:src="@{/static/js/datamgmt.js}"></script>
+<title>MODOO For Developers</title>
+</head>
+<body>
+<div class="sidebar">
+	<div class="logobox">
+		<div class="logoForm">
+			MODOO<br/>
+			For<br/>
+			Developers<br/>
+		</div>
+	</div>
+	<hr/>
+	<div class="profile">
+			환영합니다!<br/>
+			개발자 '<span th:text="${user.id}"></span>' 님!<br/>
+			<div class="btnGrp">
+				<button type="button" onclick="location.href='/user/signout'">로그아웃</button>
+			</div>
+	</div>
+	<hr/>
+	<div class="nav">
+		<ul class="navGrp">
+			<li class="navMem" onclick="location.href='/'">통합관리</li>
+			<li class="navMem active">데이터관리</li>
+			<li class="navMem">데이터전송</li>
+			<li class="navMem">로그관리</li>
+			<li class="navMem">매뉴얼</li>
+		</ul>
+	</div>
+</div>
+<div class="contents">
+	<div class="divHeader">
+		<div class="divMem">
+			<ul class="memNav">
+				<li id="infoNav" class="memNavMem active" onclick="onChange('info')">INFO</li>
+				<li id="frameNav" class="memNavMem" onclick="onChange('frame')">FRAME</li>
+			</ul>
+		</div>
+	</div>
+	<div id="info" class="divGrp active">
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td>번호</td>
+						<td>제목</td>
+						<td>횟수</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="info : ${infoList}">
+						<td th:text="${info.seq}"></td>
+						<td th:text="${info.title}"></td>
+						<td th:text="${info.cnt}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="frame" class="divGrp">
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td>번호</td>
+						<td>제목</td>
+						<td>횟수</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="frame : ${frameList}">
+						<td th:text="${frame.seq}"></td>
+						<td th:text="${frame.title}"></td>
+						<td th:text="${frame.cnt}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

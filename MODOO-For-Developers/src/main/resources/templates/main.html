@@ -27,7 +27,7 @@
 	<div class="nav">
 		<ul class="navGrp">
 			<li class="navMem active">통합관리</li>
-			<li class="navMem">데이터관리</li>
+			<li class="navMem" onclick="location.href='/datamgmt'">데이터관리</li>
 			<li class="navMem">데이터전송</li>
 			<li class="navMem">로그관리</li>
 			<li class="navMem">매뉴얼</li>
@@ -65,20 +65,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
+					<tr th:each="info : ${infoList}">
+						<td th:text="${info.seq}"></td>
+						<td th:text="${info.title}"></td>
+						<td th:text="${info.cnt}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -98,20 +88,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
+					<tr th:each="frame : ${frameList}">
+						<td th:text="${frame.seq}"></td>
+						<td th:text="${frame.title}"></td>
+						<td th:text="${frame.cnt}"></td>
 					</tr>
 				</tbody>
 			</table>
