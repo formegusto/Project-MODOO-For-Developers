@@ -17,15 +17,13 @@ public class RestApiController {
 	
 	@RequestMapping("/info")
 	public Map<String, Object> info(RequestDTO reqDTO) {
-		System.out.println(reqDTO);
-		
+		reqDTO.setType("info");
 		return apiService.readInfoData(reqDTO);
 	}
 	
 	@RequestMapping("/frame")
 	public Map<String, Object> frame(RequestDTO reqDTO) {
-		System.out.println(reqDTO);
-		
+		reqDTO.setType("frame");
 		return apiService.readFrameData(reqDTO);
 	}
 }

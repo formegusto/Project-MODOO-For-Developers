@@ -13,11 +13,13 @@ import com.wrk.mfd.entity.ModooFHI;
 import com.wrk.mfd.entity.ModooFrame;
 import com.wrk.mfd.entity.ModooInfo;
 import com.wrk.mfd.entity.RequestDTO;
+import com.wrk.mfd.entity.RequestVO;
 import com.wrk.mfd.entity.User;
 import com.wrk.mfd.repository.KeyRepository;
 import com.wrk.mfd.repository.MdataRepository;
 import com.wrk.mfd.repository.MframeRepository;
 import com.wrk.mfd.repository.MinfoRepository;
+import com.wrk.mfd.repository.ReqRepository;
 import com.wrk.mfd.repository.UserRepository;
 
 @Service
@@ -32,6 +34,8 @@ public class ApiService {
 	private MframeRepository mframeRepository;
 	@Autowired
 	private MdataRepository mdataRepository;
+	@Autowired
+	private ReqRepository reqRepository;
 	
 	public Map<String, Object> readInfoData(RequestDTO reqDTO){
 		Map<String, Object> returnMap = new HashMap<>();
@@ -44,6 +48,24 @@ public class ApiService {
 			}
 			
 			return returnMap;
+		}
+		
+		// Request 요청 검사
+		RequestVO reqVO = new RequestVO();
+		reqVO.setMseq(reqDTO.getSeq());
+		reqVO.setType(reqDTO.getType());
+		
+		if(!reqRepository.checkReq(reqVO)) {
+			ModooInfo mivo = new ModooInfo();
+			mivo.setIseq(reqDTO.getSeq());
+			
+			mivo = minfoRepository.readMinfo(mivo);
+			if(mivo != null) {
+				reqVO.setTitle(mivo.getTitle());
+				reqRepository.createReq(reqVO);
+			}
+		} else {
+			reqRepository.increaseCnt(reqVO);
 		}
 		
 		// getApiKey 유효성 검사
@@ -108,6 +130,24 @@ public class ApiService {
 			}
 			
 			return returnMap;
+		}
+		
+		// Request 요청 검사
+		RequestVO reqVO = new RequestVO();
+		reqVO.setMseq(reqDTO.getSeq());
+		reqVO.setType(reqDTO.getType());
+				
+		if(!reqRepository.checkReq(reqVO)) {
+			ModooFrame mfvo = new ModooFrame();
+			mfvo.setFseq(reqDTO.getSeq());
+				
+			mfvo = mframeRepository.readMframe(mfvo);
+			if(mfvo != null) {
+				reqVO.setTitle(mfvo.getTitle());
+				reqRepository.createReq(reqVO);
+			}
+		} else {
+			reqRepository.increaseCnt(reqVO);
 		}
 		
 		// getApiKey 유효성 검사

@@ -4,10 +4,16 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="com.wrk.mfd.repository.MframeRepository">
 		<select id="readMframe" resultType="mframe">
-			SELECT fseq
+			SELECT fseq, title
 			FROM FRAME
-			WHERE ID=#{id}
-			AND FSEQ=#{fseq}
+			<where>
+					<if test="fseq != 0">
+		                AND FSEQ = #{fseq}
+			        </if>
+			        <if test="id != null and !id.equals('')">
+			            AND ID = #{id}
+			         </if>
+			</where>
 		</select>
 		<select id="checkSeq" resultType="boolean">
 			SELECT EXISTS(

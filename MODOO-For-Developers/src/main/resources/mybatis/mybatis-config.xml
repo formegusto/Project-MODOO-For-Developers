@@ -10,5 +10,6 @@
 		<typeAlias type="com.wrk.mfd.entity.ModooFrame" alias="mframe"></typeAlias>
 		<typeAlias type="com.wrk.mfd.entity.ModooFHI" alias="mfhi"></typeAlias>
 		<typeAlias type="com.wrk.mfd.entity.Key" alias="key"></typeAlias>
+		<typeAlias type="com.wrk.mfd.entity.RequestVO" alias="req"></typeAlias>
 	</typeAliases>
 </configuration>

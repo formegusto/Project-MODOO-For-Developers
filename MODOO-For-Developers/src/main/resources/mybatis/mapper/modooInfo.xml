@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="com.wrk.mfd.repository.MinfoRepository">
 		<select id="readMinfo" resultType="minfo">
-			SELECT iseq, field
+			SELECT iseq, title ,field
 			FROM INFO
 			<where>
 					<if test="iseq != 0">

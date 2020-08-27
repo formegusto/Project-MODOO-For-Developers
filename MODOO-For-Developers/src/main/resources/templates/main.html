@@ -3,11 +3,209 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width">
-<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/static/css/main.css}" type="text/css"></link>
+<title>MODOO For Developers</title>
 </head>
 <body>
-	환영합니다! MODOO For Developers Service 입니다.
-	username ==> <span th:text="${user.id}"></span>
-	apikey ==> <span th:text="${key.apikey}"></span>
+<div class="sidebar">
+	<div class="logobox">
+		<div class="logoForm">
+			MODOO<br/>
+			For<br/>
+			Developers<br/>
+		</div>
+	</div>
+	<hr/>
+	<div class="profile">
+			환영합니다!<br/>
+			개발자 '<span th:text="${user.id}"></span>' 님!<br/>
+			<div class="btnGrp">
+				<button type="button" onclick="location.href='/user/signout'">로그아웃</button>
+			</div>
+	</div>
+	<hr/>
+	<div class="nav">
+		<ul class="navGrp">
+			<li class="navMem active">통합관리</li>
+			<li class="navMem">데이터관리</li>
+			<li class="navMem">데이터전송</li>
+			<li class="navMem">로그관리</li>
+			<li class="navMem">매뉴얼</li>
+		</ul>
+	</div>
+</div>
+<div class="contents">
+	<div class="divHeader">
+		<div class="divMem">
+			<div class="apikeyGrp">
+				<div class="apikeyName">
+					APIKEY
+				</div>
+				<div class="apikeyContent">
+					<span th:text="${key.apikey}"></span>
+				</div>
+				<button class="apikeyBtn">재발급</button>
+			</div>
+			
+		</div>
+	</div>
+	<div class="divGrp">
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td colspan="3" class="tableHeader">
+							INFO 관리
+						</td>
+					</tr>
+					<tr>
+						<td>번호</td>
+						<td>제목</td>
+						<td>횟수</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td colspan="3" class="tableHeader">
+							FRAME 관리
+						</td>
+					</tr>
+					<tr>
+						<td>번호</td>
+						<td>제목</td>
+						<td>횟수</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="divGrp">
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td colspan="3" class="tableHeader">
+							로그 관리
+						</td>
+					</tr>
+					<tr>
+						<td>번호</td>
+						<td>제목</td>
+						<td>횟수</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td colspan="3" class="tableHeader">
+							전송 요청
+						</td>
+					</tr>
+					<tr>
+						<td>번호</td>
+						<td>제목</td>
+						<td>횟수</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목입니다</td>
+						<td>2</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+	
 </body>
 </html>

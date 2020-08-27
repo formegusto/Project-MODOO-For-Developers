@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.wrk.mfd.repository.ReqRepository">
+		<select id="checkReq" resultType="boolean">
+			SELECT EXISTS(
+				SELECT *
+				FROM MFD_REQUEST
+				WHERE MSEQ=#{mseq}
+				AND TYPE=#{type}
+			) as chkreq
+		</select>
+		<insert id="createReq">
+			INSERT INTO MFD_REQUEST(title, type, mseq)
+			VALUES (#{title}, #{type}, #{mseq})
+		</insert>
+		<update id="increaseCnt">
+			UPDATE MFD_REQUEST
+			SET CNT=CNT+1
+			WHERE MSEQ=#{mseq}
+			AND TYPE=#{type}
+		</update>
+	</mapper>

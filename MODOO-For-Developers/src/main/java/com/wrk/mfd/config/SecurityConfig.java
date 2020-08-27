@@ -58,7 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.loginProcessingUrl("/user/signin/do")
 				.defaultSuccessUrl("/authCheck")
 				.successHandler(loginSuccessHandler)
-				.permitAll();
+				.permitAll()
+			.and()
+			.logout()
+				.logoutUrl("/user/signout");
 	}
 	
 }
