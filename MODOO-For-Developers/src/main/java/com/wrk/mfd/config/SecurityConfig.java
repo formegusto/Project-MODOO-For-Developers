@@ -18,6 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private CustomUserDetailService customUserDetailService;
 	@Autowired
 	private LoginSuccessHandler loginSuccessHandler;
+	@Autowired
+	private CustomAccessDeniedHandler customAccessDeniedHandler;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -61,7 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.permitAll()
 			.and()
 			.logout()
-				.logoutUrl("/user/signout");
+				.logoutUrl("/user/signout")
+			.and()
+				.exceptionHandling()
+				.accessDeniedHandler(customAccessDeniedHandler);
 	}
-	
 }
