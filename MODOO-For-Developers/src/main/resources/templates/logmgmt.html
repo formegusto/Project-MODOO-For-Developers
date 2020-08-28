@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" th:href="@{/static/css/logmgmt.css}" type="text/css"></link>
+<title>MODOO For Developers</title>
+</head>
+<body>
+<div class="sidebar">
+	<div class="logobox">
+		<div class="logoForm">
+			MODOO<br/>
+			For<br/>
+			Developers<br/>
+		</div>
+	</div>
+	<hr/>
+	<div class="profile">
+			환영합니다!<br/>
+			개발자 '<span th:text="${user.id}"></span>' 님!<br/>
+			<div class="btnGrp">
+				<button type="button" onclick="location.href='/user/signout'">로그아웃</button>
+			</div>
+	</div>
+	<hr/>
+	<div class="nav">
+		<ul class="navGrp">
+			<li class="navMem" onclick="location.href='/'">통합관리</li>
+			<li class="navMem" onclick="location.href='/datamgmt'">데이터관리</li>
+			<li class="navMem">데이터전송</li>
+			<li class="navMem active">로그관리</li>
+			<li class="navMem">매뉴얼</li>
+		</ul>
+	</div>
+</div>
+<div class="contents">
+	<div class="divGrp">
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td colspan="6" class="tableHeader">
+							LOG
+						</td>
+					</tr>
+					<tr>
+						<td>RequestTime</td>
+						<td>Result</td>
+						<td>message</td>
+						<td>APIKEY</td>
+						<td>TYPE</td>
+						<td>SEQ</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="log : ${logList}">
+						<td th:text="${#calendars.format(log.createAt, 'MM-dd HH:mm')}"></td>
+						<td th:text="${log.result}" th:style="${log.result == 'FAIL' ? 'color:red' : 'color:blue'}"></td>
+						<td th:text="${log.message}"></td>
+						<td th:text="${log.apikey}"></td>
+						<td th:text="${log.type}"></td>
+						<td th:text="${log.mseq}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="divGrp">
+		<div class="divBtnGrp">
+			<button class="left" th:style="${page == 1 ? 'opacity:0' : 'opacity:1'}" th:onclick="'location.href=\'/logmgmt?page=' + ${page - 1} + '\''">Prev</button>
+			<button class="right" th:style="${isLastPage ? 'opacity:0' : 'opacity:1'}" th:onclick="'location.href=\'/logmgmt?page=' + ${page + 1} + '\''">Next</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

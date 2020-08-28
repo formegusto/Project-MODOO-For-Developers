@@ -1,6 +1,6 @@
 package com.wrk.mfd.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;

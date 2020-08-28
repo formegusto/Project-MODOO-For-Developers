@@ -29,7 +29,7 @@
 			<li class="navMem active">통합관리</li>
 			<li class="navMem" onclick="location.href='/datamgmt'">데이터관리</li>
 			<li class="navMem">데이터전송</li>
-			<li class="navMem">로그관리</li>
+			<li class="navMem" onclick="location.href='/logmgmt'">로그관리</li>
 			<li class="navMem">매뉴얼</li>
 		</ul>
 	</div>
@@ -114,9 +114,9 @@
 				</thead>
 				<tbody>
 					<tr th:each="log : ${logList}">
-						<td th:text="${log.result}"></td>
+						<td th:text="${log.result}" th:style="${log.result == 'FAIL' ? 'color:red' : 'color:blue'}"></td>
 						<td th:text="${log.message}"></td>
-						<td th:text="${log.createAt}"></td>
+						<td th:text="${#calendars.format(log.createAt, 'MM-dd HH:mm')}"></td>
 					</tr>
 				</tbody>
 			</table>

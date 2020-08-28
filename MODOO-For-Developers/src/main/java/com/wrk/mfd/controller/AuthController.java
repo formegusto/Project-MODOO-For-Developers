@@ -41,7 +41,7 @@ public class AuthController {
 		ModooUser userCheck = muserService.authMuser(muser);
 		
 		if(userCheck==null) {
-			return "auth/failed";
+			return "auth/modooAuth";
 		} else {
 			model.addAttribute("muser", muser);
 			

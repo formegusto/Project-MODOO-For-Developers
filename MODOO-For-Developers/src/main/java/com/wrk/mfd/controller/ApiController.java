@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wrk.mfd.entity.Key;
 import com.wrk.mfd.entity.LogVO;
@@ -56,9 +57,11 @@ public class ApiController {
 			payload.clear();
 			payload.put("user_id", user.getModoo_id());
 			payload.put("apikey", key.getApikey());
+			payload.put("start", 0);
 			payload.put("limit", 5);
 		}
 		List<LogVO> logList = logRepository.readLog(payload);
+		System.out.println(logList);
 		
 		model.addAttribute("logList", logList);
 		model.addAttribute("infoList", infoReqList);
@@ -79,6 +82,47 @@ public class ApiController {
 		model.addAttribute("user", user);
 		
 		return "/datamgmt";
+	}
+	
+	@GetMapping("/logmgmt")
+	public String logmgmt(@AuthenticationPrincipal UserDetails userDetails,
+			Model model, @RequestParam(defaultValue = "1") int page) {
+		User user = userService.readUser(userDetails);
+		Key key = keyService.getApikey(userDetails);
+		
+		Map<String, Object> payload = new HashMap<>();
+		{
+			payload.clear();
+			payload.put("user_id", user.getModoo_id());
+			payload.put("apikey", key.getApikey());
+			payload.put("start", (page-1) * 10);
+			payload.put("limit", 10);
+		}
+		List<LogVO> logList = logRepository.readLog(payload);
+		
+		Boolean isLastPage = false;
+		if(logList.size() < 10) {
+			isLastPage = true;
+		} else {
+			{
+				payload.clear();
+				payload.put("user_id", user.getModoo_id());
+				payload.put("apikey", key.getApikey());
+				payload.put("start", (page) * 10);
+				payload.put("limit", 10);
+			}
+			List<LogVO> tmpList = logRepository.readLog(payload);
+			if(tmpList.size() == 0) {
+				isLastPage = true;
+			}
+		}
+		
+		model.addAttribute("isLastPage", isLastPage);
+		model.addAttribute("page", page);
+		model.addAttribute("logList", logList);
+		model.addAttribute("user", user);
+		
+		return "/logmgmt";
 	}
 	
 	@GetMapping("/authCheck")

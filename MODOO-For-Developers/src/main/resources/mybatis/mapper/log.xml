@@ -35,6 +35,6 @@
 			) AS F
 			ON F.FSEQ = ML.MSEQ
 			WHERE F.FSEQ != 0 OR APIKEY = #{apikey}
-			ORDER BY createAt DESC LIMIT #{limit};
+			ORDER BY createAt DESC LIMIT #{start}, #{limit};
 		</select>
 	</mapper>
