@@ -107,36 +107,16 @@
 						</td>
 					</tr>
 					<tr>
-						<td>번호</td>
-						<td>제목</td>
-						<td>횟수</td>
+						<td>결과</td>
+						<td>메세지</td>
+						<td>날짜</td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
+					<tr th:each="log : ${logList}">
+						<td th:text="${log.result}"></td>
+						<td th:text="${log.message}"></td>
+						<td th:text="${log.createAt}"></td>
 					</tr>
 				</tbody>
 			</table>

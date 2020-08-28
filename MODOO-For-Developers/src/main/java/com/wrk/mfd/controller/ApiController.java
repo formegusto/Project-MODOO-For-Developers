@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.wrk.mfd.entity.Key;
+import com.wrk.mfd.entity.LogVO;
 import com.wrk.mfd.entity.RequestVO;
 import com.wrk.mfd.entity.User;
+import com.wrk.mfd.repository.LogRepository;
 import com.wrk.mfd.repository.ReqRepository;
 import com.wrk.mfd.service.KeyService;
 import com.wrk.mfd.service.UserService;
@@ -26,6 +28,8 @@ public class ApiController {
 	private KeyService keyService;
 	@Autowired
 	private ReqRepository reqRepository;
+	@Autowired
+	private LogRepository logRepository;
 	
 	@GetMapping("/")
 	public String mainPage(@AuthenticationPrincipal UserDetails userDetails,
@@ -33,7 +37,7 @@ public class ApiController {
 		User user = userService.readUser(userDetails);
 		Key key = keyService.getApikey(userDetails);
 		
-		Map<String, String> payload = new HashMap<>();
+		Map<String, Object> payload = new HashMap<>();
 		
 		{
 			payload.put("user_id", user.getModoo_id());
@@ -48,6 +52,15 @@ public class ApiController {
 		}
 		List<RequestVO> frameReqList = reqRepository.readReq(payload);
 		
+		{
+			payload.clear();
+			payload.put("user_id", user.getModoo_id());
+			payload.put("apikey", key.getApikey());
+			payload.put("limit", 5);
+		}
+		List<LogVO> logList = logRepository.readLog(payload);
+		
+		model.addAttribute("logList", logList);
 		model.addAttribute("infoList", infoReqList);
 		model.addAttribute("frameList", frameReqList);
 		model.addAttribute("user", user);

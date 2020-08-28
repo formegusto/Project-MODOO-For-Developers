@@ -12,7 +12,7 @@ public interface ReqRepository {
 	public Boolean checkReq(RequestVO vo);
 	public void createReq(RequestVO vo);
 	public void increaseCnt(RequestVO vo);
-	public List<RequestVO> readReq(Map<String, String> payload);
+	public List<RequestVO> readReq(Map<String, Object> payload);
 	public List<RequestVO> readMinfo(String id);
 	public List<RequestVO> readMframe(String id);
 }

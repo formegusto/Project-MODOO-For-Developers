@@ -36,6 +36,8 @@ public class ApiService {
 	private MdataRepository mdataRepository;
 	@Autowired
 	private ReqRepository reqRepository;
+	@Autowired
+	private LogService logService;
 	
 	public Map<String, Object> readInfoData(RequestDTO reqDTO){
 		Map<String, Object> returnMap = new HashMap<>();
@@ -44,9 +46,9 @@ public class ApiService {
 		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0) {
 			{
 				returnMap.put("result", 0);
-				returnMap.put("msg", "잘못된 파라미터 입니다.");
+				returnMap.put("message", "잘못된 파라미터 입니다.");
 			}
-			
+			logService.insertLog(reqDTO, returnMap);
 			return returnMap;
 		}
 		
@@ -72,9 +74,9 @@ public class ApiService {
 		if(!keyRepository.checkApikey(reqDTO.getApikey())) {
 			{
 				returnMap.put("result", 0);
-				returnMap.put("msg", "유효하지 않은 API Key 입니다.");
+				returnMap.put("message", "유효하지 않은 API Key 입니다.");
 			}
-			
+			logService.insertLog(reqDTO, returnMap);
 			return returnMap;
 		}
 		
@@ -94,7 +96,7 @@ public class ApiService {
 					returnMap.put("result", 0);
 					returnMap.put("message", "권한이 없는 INFO 입니다.");
 				}
-				
+				logService.insertLog(reqDTO, returnMap);
 				return returnMap;
 			} else {
 				minfo = minfoRepository.readMinfo(minfo);
@@ -104,7 +106,7 @@ public class ApiService {
 				returnMap.put("result", 0);
 				returnMap.put("message", "존재하지 않는 INFO 입니다.");
 			}
-				
+			logService.insertLog(reqDTO, returnMap);
 			return returnMap;
 		}
 		
@@ -113,9 +115,10 @@ public class ApiService {
 		mdata.setIseq(minfo.getIseq());
 		{
 			returnMap.put("result", 1);
+			returnMap.put("message", "성공");
 			returnMap.put("datalist", mdataRepository.readMdata(mdata));
 		}
-		
+		logService.insertLog(reqDTO, returnMap);
 		return returnMap;
 	}
 	
@@ -126,9 +129,9 @@ public class ApiService {
 		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0) {
 			{
 				returnMap.put("result", 0);
-				returnMap.put("msg", "잘못된 파라미터 입니다.");
+				returnMap.put("message", "잘못된 파라미터 입니다.");
 			}
-			
+			logService.insertLog(reqDTO, returnMap);
 			return returnMap;
 		}
 		
@@ -154,9 +157,9 @@ public class ApiService {
 		if(!keyRepository.checkApikey(reqDTO.getApikey())) {
 			{
 				returnMap.put("result", 0);
-				returnMap.put("msg", "유효하지 않은 API Key 입니다.");
+				returnMap.put("message", "유효하지 않은 API Key 입니다.");
 			}
-			
+			logService.insertLog(reqDTO, returnMap);
 			return returnMap;
 		}
 		
@@ -176,7 +179,7 @@ public class ApiService {
 					returnMap.put("result", 0);
 					returnMap.put("message", "권한이 없는 FRAME 입니다.");
 				}
-				
+				logService.insertLog(reqDTO, returnMap);
 				return returnMap;
 			} else {
 				mframe = mframeRepository.readMframe(mframe);
@@ -186,7 +189,7 @@ public class ApiService {
 				returnMap.put("result", 0);
 				returnMap.put("message", "존재하지 않는 FRAME 입니다.");
 			}
-				
+			logService.insertLog(reqDTO, returnMap);	
 			return returnMap;
 		}
 		
@@ -215,9 +218,10 @@ public class ApiService {
 		// 데이터 구성
 		{
 			returnMap.put("result", 1);
+			returnMap.put("message", "성공");
 			returnMap.put("infolist", infoList);
 		}
-		
+		logService.insertLog(reqDTO, returnMap);
 		return returnMap;
 	}
 }
