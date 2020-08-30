@@ -29,4 +29,29 @@
 				</where>
 			) as chkseq
 		</select>
+		<select id="readBoardInfo" resultType="minfo">
+			SELECT I.iseq, title
+			FROM INFO as I
+				JOIN (
+					SELECT iseq FROM FRAME_HAVE_INFO WHERE FSEQ=#{fseq}
+					UNION
+					SELECT iseq FROM TM_HAVE_INFO WHERE TSEQ=#{tseq}
+					UNION
+					SELECT iseq FROM VISUAL_HAVE_INFO WHERE VSEQ=#{vseq} ) as A
+				ON I.iseq = A.iseq;
+		</select>
+		<insert id="copyMinfo">
+			INSERT INTO INFO(iseq, title, link, content, field, cssquery, itype, id)
+			SELECT 
+				(SELECT ifnull(max(iseq), 0) + 1 FROM INFO A) iseq,
+				title,
+				link,
+				content,
+				field,
+				cssquery,
+				itype,
+				#{id} 
+					FROM INFO 
+					WHERE ISEQ=#{iseq};
+		</insert>
 	</mapper>

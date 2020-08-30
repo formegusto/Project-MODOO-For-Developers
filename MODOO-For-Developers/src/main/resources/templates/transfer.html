@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" th:href="@{/static/css/transfer.css}" type="text/css"></link>
+<script type="text/javascript" th:src="@{/static/js/transfer.js}"></script>
+<title>MODOO For Developers</title>
+</head>
+<body>
+<div class="negativeDiv">
+	<div class="negativeHeader">
+		거절메세지를 남겨주세요!
+	</div>
+	<hr/>
+	<form class="negativeForm" method="post" th:action="@{/negativeReq}">
+		<input type="hidden" name="seq" value="" id="seq"/>
+		<textarea name="resmsg" placeholder="메세지"></textarea>
+		<div class="negativeBtnGrp">
+				<button type="submit">전송</button>
+				<button type="button" onclick="onCancle()">취소</button>
+		</div>
+	</form>
+</div>
+<div class="sidebar">
+	<div class="logobox">
+		<div class="logoForm">
+			MODOO<br/>
+			For<br/>
+			Developers<br/>
+		</div>
+	</div>
+	<hr/>
+	<div class="profile">
+			환영합니다!<br/>
+			개발자 '<span th:text="${user.id}"></span>' 님!<br/>
+			<div class="btnGrp">
+				<button type="button" onclick="location.href='/user/signout'">로그아웃</button>
+			</div>
+	</div>
+	<hr/>
+	<div class="nav">
+		<ul class="navGrp">
+			<li class="navMem" onclick="location.href='/'">통합관리</li>
+			<li class="navMem" onclick="location.href='/datamgmt'">데이터관리</li>
+			<li class="navMem active">데이터전송</li>
+			<li class="navMem" onclick="location.href='/logmgmt'">로그관리</li>
+			<li class="navMem">매뉴얼</li>
+		</ul>
+	</div>
+</div>
+<div class="contents">
+	<div class="divGrp">
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td colspan="4" class="tableHeader">
+							My Request
+						</td>
+					</tr>
+					<tr>
+						<td>RequestTime</td>
+						<td>Status</td>
+						<td>Message</td>
+						<td>To</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="myReq : ${myReqList}">
+						<td th:text="${#calendars.format(myReq.createAt, 'MM-dd HH:mm')}"></td>
+						<td th:if="${myReq.status == '진행중'}" style="color: orange">진행중</td>
+						<td th:if="${myReq.status == '거절'}" style="color: red">거절</td>
+						<td th:if="${myReq.status == '수락'}" style="color: blue">수락</td>
+						<td th:if="${myReq.resmsg == null}">진행 중인 요청 입니다 :)</td>
+						<td th:if="${myReq.resmsg != null}" th:text="${myReq.resmsg}"></td>
+						<td th:text="${myReq.resuser}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="divGrp">
+		<div class="divBtnGrp">
+			<button class="left">Prev</button>
+			<button class="right">Next</button>
+		</div>
+	</div>
+	<div class="divGrp">
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td colspan="6" class="tableHeader">
+							Other Request
+						</td>
+					</tr>
+					<tr>
+						<td>RequestTime</td>
+						<td>Status</td>
+						<td colspan="2">Message</td>
+						<td>From</td>
+						<td>Result</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="otherReq : ${otherReqList}">
+						<td th:text="${#calendars.format(otherReq.createAt, 'MM-dd HH:mm')}"></td>
+						<td th:if="${otherReq.status == '진행중'}" style="color: orange">진행중</td>
+						<td th:if="${otherReq.status == '거절'}" style="color: red">거절</td>
+						<td th:if="${otherReq.status == '수락'}" style="color: blue">수락</td>
+						<td th:text="${otherReq.reqmsg}" colspan="2"></td>
+						<td th:text="${otherReq.requser}"></td>
+						<td th:if="${otherReq.status == '진행중'}" class="btnTd">
+							<button th:onclick="'onNegative(' + ${otherReq.seq} + ')'">거절</button>
+							<button th:onclick="'location.href=\'/accepting?seq=' + ${otherReq.seq} + '&bseq=' + ${otherReq.bseq} + '\''">수락</button>
+						</td>
+						<td th:if="${otherReq.status != '진행중'}">
+							종료
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="divGrp">
+		<div class="divBtnGrp">
+			<button class="left">Prev</button>
+			<button class="right">Next</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

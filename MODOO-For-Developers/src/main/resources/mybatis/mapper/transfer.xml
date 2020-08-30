@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.wrk.mfd.repository.TransferRepository">
+		<select id="readTransferOne" resultType="trans">
+			SELECT *
+			FROM MFD_TRANSFER
+			WHERE SEQ=#{seq}
+		</select>
+		<select id="readTransfer" resultType="trans">
+			SELECT *
+			FROM MFD_TRANSFER
+			WHERE REQUSER=#{requser}
+			OR RESUSER=#{resuser}
+			ORDER BY createAt DESC LIMIT #{start}, #{limit}
+		</select>
+		<select id="readMyTrans" resultType="trans">
+			SELECT *
+			FROM MFD_TRANSFER
+			WHERE REQUSER=#{requser}
+			ORDER BY createAt DESC LIMIT #{limit}
+		</select>
+		<select id="readOtherTrans" resultType="trans">
+			SELECT *
+			FROM MFD_TRANSFER
+			WHERE RESUSER=#{resuser}
+			ORDER BY createAt DESC LIMIT #{limit}
+		</select>
+		<update id="negativeReq">
+			UPDATE MFD_TRANSFER
+			SET RESMSG=#{resmsg}
+			, STATUS='거절'
+			WHERE SEQ=#{seq}
+		</update>
+		<update id="acceptReq">
+			UPDATE MFD_TRANSFER
+			SET RESMSG=#{resmsg}
+			, STATUS='수락'
+			WHERE SEQ=#{seq}
+		</update>
+	</mapper>

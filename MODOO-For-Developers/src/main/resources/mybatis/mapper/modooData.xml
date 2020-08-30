@@ -8,4 +8,12 @@
 			FROM DATA
 			WHERE ISEQ=#{iseq}
 		</select>
+		<insert id="copyMdata">
+			INSERT INTO DATA(iseq, data)
+			SELECT 
+				(SELECT ifnull(max(iseq), 0) FROM INFO A) iseq,
+				data 
+			FROM DATA 
+			WHERE ISEQ=#{iseq};
+		</insert>
 	</mapper>

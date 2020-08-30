@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.wrk.mfd.repository.MboardRepository">
+		<select id="readTitle" resultType="mboard">
+			SELECT title
+			FROM BOARD
+			WHERE BSEQ=#{bseq}
+		</select>
+		<select id="readBHD" resultType="mbhd">
+			SELECT seq, type
+			FROM BOARD_HAVE_DATA
+			WHERE BSEQ=#{bseq}
+		</select>
+	</mapper>

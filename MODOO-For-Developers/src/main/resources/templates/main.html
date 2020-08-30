@@ -28,7 +28,7 @@
 		<ul class="navGrp">
 			<li class="navMem active">통합관리</li>
 			<li class="navMem" onclick="location.href='/datamgmt'">데이터관리</li>
-			<li class="navMem">데이터전송</li>
+			<li class="navMem" onclick="location.href='/transfer'">데이터전송</li>
 			<li class="navMem" onclick="location.href='/logmgmt'">로그관리</li>
 			<li class="navMem">매뉴얼</li>
 		</ul>
@@ -126,40 +126,22 @@
 				<thead>
 					<tr>
 						<td colspan="3" class="tableHeader">
-							전송 요청
+							전송 관리
 						</td>
 					</tr>
 					<tr>
-						<td>번호</td>
-						<td>제목</td>
-						<td>횟수</td>
+						<td>상태</td>
+						<td>메세지</td>
+						<td>날짜</td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>2</td>
+					<tr th:each="transfer : ${transferList}">
+						<td th:if="${transfer.status == '진행중'}" style="color: orange">진행중</td>
+						<td th:if="${transfer.status == '거절'}" style="color: red">거절</td>
+						<td th:if="${transfer.status == '수락'}" style="color: blue">수락</td>
+						<td th:text="${transfer.reqmsg}"></td>
+						<td th:text="${#calendars.format(transfer.createAt, 'MM-dd HH:mm')}"></td>
 					</tr>
 				</tbody>
 			</table>
