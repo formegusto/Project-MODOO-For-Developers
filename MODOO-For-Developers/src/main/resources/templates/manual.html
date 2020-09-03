@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" th:href="@{/static/css/manual.css}" type="text/css"></link>
+<title>MODOO For Developers</title>
+</head>
+<body>
+<div class="sidebar">
+	<div class="logobox">
+		<div class="logoForm">
+			MODOO<br/>
+			For<br/>
+			Developers<br/>
+		</div>
+	</div>
+	<hr/>
+	<div class="profile">
+			환영합니다!<br/>
+			개발자 '<span th:text="${user.id}"></span>' 님!<br/>
+			<div class="btnGrp">
+				<button type="button" onclick="location.href='/user/signout'">로그아웃</button>
+			</div>
+	</div>
+	<hr/>
+	<div class="nav">
+		<ul class="navGrp">
+			<li class="navMem" onclick="location.href='/'">통합관리</li>
+			<li class="navMem" onclick="location.href='/datamgmt'">데이터관리</li>
+			<li class="navMem" onclick="location.href='/transfer'">데이터전송</li>
+			<li class="navMem" onclick="location.href='/logmgmt'">로그관리</li>
+			<li class="navMem active">매뉴얼</li>
+		</ul>
+	</div>
+</div>
+<div class="contents">
+	매뉴얼 페이지 입니다.
+</div>
+	
+</body>
+</html>

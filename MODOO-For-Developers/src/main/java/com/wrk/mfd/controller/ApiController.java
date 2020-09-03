@@ -252,4 +252,13 @@ public class ApiController {
 		
 		return page;
 	}
+	
+	@GetMapping("/manual")
+	public String manul(@AuthenticationPrincipal UserDetails userDetails,
+			Model model) {
+		User user = userService.readUser(userDetails);
+
+		model.addAttribute("user", user);
+		return "/manual";
+	}
 }
