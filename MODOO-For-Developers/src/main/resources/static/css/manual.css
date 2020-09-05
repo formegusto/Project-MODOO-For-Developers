@@ -132,6 +132,97 @@ hr {
 	flex-flow: column;
 }
 
+.divHeader {
+	flex: .15;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	flex-wrap: nowrap;
+}
+
+.divGrp {
+	display: none;
+}
+
+.divGrp.active {
+	flex: 1;
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	flex-wrap: nowrap;
+}
+
+.divMem {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 1rem;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 1.5rem;
+	border: 1px solid black;
+}
+
+.divMem table {
+	width: 80%;
+	height: 80%;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 1.5rem;
+}
+
+.divMem thead td {
+	color: white;
+	background: black;
+	text-align: center;
+	font-size: 2rem;
+}
+
+.titleTd {
+	color: white;
+	background: black;
+	text-align: center;
+	font-size: 2rem;
+}
+
+.divMem td {
+	padding: 1rem;
+}
+
+.memNav {
+	width: 80%;
+	padding: 0;
+	list-style-type: none;
+	display: flex;
+	flex-flow: row;
+	flex-wrap: nowrap;
+	margin-bottom: 0;
+}
+
+.memNavMem {
+	flex: 1;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 2.5rem;
+	text-align: center;
+	background: black;
+	color:white;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	cursor: pointer;
+	transition: .7s;
+	border-radius: 1rem;
+}
+
+.memNavMem.active {
+	background: white;
+	color: black;
+	cursor: default;
+}
+
+.memNavMem:hover {
+	background: white;
+	color: black;
+}
+
 @keyframes fadeIn {
 	from {
 		opacity:0;

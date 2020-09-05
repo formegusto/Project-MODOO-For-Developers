@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" th:href="@{/static/css/manual.css}" type="text/css"></link>
+<script type="text/javascript" th:src="@{/static/js/manual.js}"></script>
 <title>MODOO For Developers</title>
 </head>
 <body>
@@ -35,8 +36,132 @@
 	</div>
 </div>
 <div class="contents">
-	매뉴얼 페이지 입니다.
+	<div class="divHeader">
+		<div class="divMem">
+			<ul class="memNav">
+				<li id="getNav" class="memNavMem active" onclick="onChange('get')">조회</li>
+				<li id="postNav" class="memNavMem" onclick="onChange('post')">입력</li>
+				<li id="updateNav" class="memNavMem" onclick="onChange('update')">수정</li>
+				<li id="deleteNav" class="memNavMem" onclick="onChange('delete')">삭제</li>
+			</ul>
+		</div>
+		<div class="divMem">
+			본 문서는 React.js를 기준으로 작성되었습니다.
+		</div>
+	</div>
+	<div id="get" class="divGrp active">
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td></td>
+						<td>request</td>
+						<td>response</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="titleTd">INFO</td>
+						<td>
+							axios.get("http://MFD_URL"<br/>
+								+ "/api/info"<br/>
+								+ "?apikey={당신의 APIKEY}"<br/>
+								+ "?seq={조회하고자 하는 INFO 번호}"<br/>
+							)
+						</td>
+						<td>
+							{<br/>
+							 &nbsp;result : "성공여부가 적혀있어요!"<br/>
+							 &nbsp;datalist : ["데이터배열이 들어가있어요!"]<br/>
+							 &nbsp;message : "실패 시 원인이 적혀있어요!"<br/>
+							}
+						</td>
+					</tr>
+					<tr>
+						<td class="titleTd">FRAME</td>
+						<td>
+							axios.get("http://MFD_URL"<br/>
+								+ "/api/frame"<br/>
+								+ "?apikey={당신의 APIKEY}"<br/>
+								+ "?seq={조회하고자 하는 FRAME 번호}"<br/>
+							)
+						</td>
+						<td>
+							{<br/>
+							 &nbsp;result : "성공여부가 적혀있어요!"<br/>
+							 &nbsp;infolist : ["인포배열이 들어가 있어요!"<br/>
+							 	&nbsp;&nbsp;{<br/>
+							 		&nbsp;&nbsp;&nbsp;field : "필드명이 들어가 있어요!"<br/>
+							 		&nbsp;&nbsp;&nbsp;datalist : ["데이터배열이 들어가있어요!"]</br>
+							 	&nbsp;&nbsp;}<br/>
+							 &nbsp;]<br/>
+							 &nbsp;message : "실패 시 원인이 적혀있어요!"<br/>
+							}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="post" class="divGrp">
+		<div class="divMem">
+			<table>
+				<thead>
+					<tr>
+						<td></td>
+						<td>request</td>
+						<td>response</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="titleTd">INFO</td>
+						<td>
+							axios.post("http://MFD_URL/api/info",<br/>
+							{<br/>
+							&nbsp;"apikey":{당신의 APIKEY}<br/>
+							&nbsp;"seq":{넣고자하는 INFO 번호}<br/>
+							&nbsp;"data":["넣고자하는데이터배열"]<br/>
+							)
+						</td>
+						<td>
+							{<br/>
+							 &nbsp;result : "성공여부가 적혀있어요!"<br/>
+							 &nbsp;message : "실패 시 원인이 적혀있어요!"<br/>
+							}
+						</td>
+					</tr>
+					<tr>
+						<td class="titleTd">FRAME</td>
+						<td>
+							axios.post("http://MFD_URL/api/frame",<br/>
+							{<br/>
+							&nbsp;"apikey":{당신의 APIKEY}<br/>
+							&nbsp;"seq":{넣고자하는 FRAME 번호}<br/>
+							&nbsp;"data":["넣고자하는데이터배열"]<br/>
+							)
+						</td>
+						<td>
+							{<br/>
+							 &nbsp;result : "성공여부가 적혀있어요!"<br/>
+							 &nbsp;message : "실패 시 원인이 적혀있어요!"<br/>
+							}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="update" class="divGrp">
+		<div class="divMem">
+			update Manual
+		</div>
+	</div>
+	<div id="delete" class="divGrp">
+		<div class="divMem">
+			delete Manual
+		</div>
+	</div>
 </div>
-	
 </body>
 </html>
