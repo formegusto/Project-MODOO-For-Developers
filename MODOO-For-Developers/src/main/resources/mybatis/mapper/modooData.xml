@@ -16,4 +16,8 @@
 			FROM DATA 
 			WHERE ISEQ=#{iseq};
 		</insert>
+		<insert id="postMdata">
+			INSERT INTO DATA(iseq, data)
+			VALUES (#{iseq}, #{data})
+		</insert>
 	</mapper>

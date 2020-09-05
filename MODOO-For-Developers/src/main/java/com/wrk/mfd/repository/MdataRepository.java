@@ -11,4 +11,5 @@ import com.wrk.mfd.entity.ModooData;
 public interface MdataRepository {
 	public List<String> readMdata(ModooData vo);
 	public void copyMdata(Map<String, Object> payload);
+	public void postMdata(ModooData vo);
 }

@@ -224,4 +224,205 @@ public class ApiService {
 		logService.insertLog(reqDTO, returnMap);
 		return returnMap;
 	}
+	
+	public Map<String, Object> postInfoData(RequestDTO reqDTO) {
+Map<String, Object> returnMap = new HashMap<>();
+		
+		// 파라미터 유효성 검사
+		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "잘못된 파라미터 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// Request 요청 검사
+		RequestVO reqVO = new RequestVO();
+		reqVO.setMseq(reqDTO.getSeq());
+		reqVO.setType(reqDTO.getType());
+		
+		if(!reqRepository.checkReq(reqVO)) {
+			ModooInfo mivo = new ModooInfo();
+			mivo.setIseq(reqDTO.getSeq());
+			
+			mivo = minfoRepository.readMinfo(mivo);
+			if(mivo != null) {
+				reqVO.setTitle(mivo.getTitle());
+				reqRepository.createReq(reqVO);
+			}
+		} else {
+			reqRepository.increaseCnt(reqVO);
+		}
+		
+		// getApiKey 유효성 검사
+		if(!keyRepository.checkApikey(reqDTO.getApikey())) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "유효하지 않은 API Key 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// getUser
+		int user_id = keyRepository.readUserId(reqDTO.getApikey());
+		User findUser = new User();
+		findUser.setSeq(user_id);
+		findUser = userRepository.readUser(findUser);
+		
+		// SEQ 유효성 검사
+		ModooInfo minfo = new ModooInfo();
+		minfo.setIseq(reqDTO.getSeq());
+		if(minfoRepository.checkSeq(minfo)) {
+			minfo.setId(findUser.getModoo_id());
+			if(!minfoRepository.checkSeq(minfo)) {
+				{
+					returnMap.put("result", 0);
+					returnMap.put("message", "권한이 없는 INFO 입니다.");
+				}
+				logService.insertLog(reqDTO, returnMap);
+				return returnMap;
+			} else {
+				minfo = minfoRepository.readMinfo(minfo);
+			}
+		} else {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "존재하지 않는 INFO 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// 데이터 개수 유효성 검사
+		if(reqDTO.getData().size() != 1) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "데이터 개수가 맞지 않습니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);	
+			return returnMap;
+		}
+		
+		ModooData mData = new ModooData();
+		mData.setIseq(reqDTO.getSeq());
+		mData.setData(reqDTO.getData().get(0));
+		
+		mdataRepository.postMdata(mData);
+		
+		// 데이터 구성
+		{
+			returnMap.put("result", 1);
+			returnMap.put("message", "성공");
+		}
+		logService.insertLog(reqDTO, returnMap);
+		
+		return returnMap;
+	}
+	
+	public Map<String, Object> postFrameData(RequestDTO reqDTO) {
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		// 파라미터 유효성 검사
+		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "잘못된 파라미터 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// Request 요청 검사
+		RequestVO reqVO = new RequestVO();
+		reqVO.setMseq(reqDTO.getSeq());
+		reqVO.setType(reqDTO.getType());
+				
+		if(!reqRepository.checkReq(reqVO)) {
+			ModooFrame mfvo = new ModooFrame();
+			mfvo.setFseq(reqDTO.getSeq());
+				
+			mfvo = mframeRepository.readMframe(mfvo);
+			if(mfvo != null) {
+				reqVO.setTitle(mfvo.getTitle());
+				reqRepository.createReq(reqVO);
+			}
+		} else {
+			reqRepository.increaseCnt(reqVO);
+		}
+		
+		// getApiKey 유효성 검사
+		if(!keyRepository.checkApikey(reqDTO.getApikey())) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "유효하지 않은 API Key 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// getUser
+		int user_id = keyRepository.readUserId(reqDTO.getApikey());
+		User findUser = new User();
+		findUser.setSeq(user_id);
+		findUser = userRepository.readUser(findUser);
+		
+		// SEQ 유효성 검사
+		ModooFrame mframe = new ModooFrame();
+		mframe.setFseq(reqDTO.getSeq());
+		if(mframeRepository.checkSeq(mframe)) {
+			mframe.setId(findUser.getModoo_id());
+			if(!mframeRepository.checkSeq(mframe)) {
+				{
+					returnMap.put("result", 0);
+					returnMap.put("message", "권한이 없는 FRAME 입니다.");
+				}
+				logService.insertLog(reqDTO, returnMap);
+				return returnMap;
+			} else {
+				mframe = mframeRepository.readMframe(mframe);
+			}
+		} else {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "존재하지 않는 FRAME 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);	
+			return returnMap;
+		}
+		
+		// 데이터 개수 유효성 검사
+		List<ModooFHI> fhiList = mframeRepository.readFHI(mframe);
+		if(reqDTO.getData().size() != fhiList.size()) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "데이터 개수가 맞지 않습니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);	
+			return returnMap;
+		}
+		
+		List<String> dataList = reqDTO.getData();
+		int idx = 0;
+		for(ModooFHI fhi : fhiList) {
+			ModooData mData = new ModooData();
+			mData.setIseq(fhi.getIseq());
+			mData.setData(dataList.get(idx));
+			
+			mdataRepository.postMdata(mData);
+			idx++;
+		}
+		
+		
+		// 데이터 구성
+		{
+			returnMap.put("result", 1);
+			returnMap.put("message", "성공");
+		}
+		logService.insertLog(reqDTO, returnMap);
+		
+		return returnMap;
+	}
 }
