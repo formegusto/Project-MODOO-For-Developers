@@ -1,11 +1,9 @@
 package com.wrk.mfd.controller;
 
-import java.io.IOException;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,9 +43,17 @@ public class RestApiController {
 	
 	@PostMapping("/frame")
 	@ResponseBody
-	public Map<String, Object> postFrame(@RequestBody RequestDTO reqDTO,
-			HttpServletResponse response) throws IOException {
+	public Map<String, Object> postFrame(@RequestBody RequestDTO reqDTO){
 		reqDTO.setType("frame");
 		return apiService.postFrameData(reqDTO);
+	}
+	
+	@DeleteMapping("/frame")
+	@ResponseBody
+	public Map<String, Object> deleteFrame(RequestDTO reqDTO) {
+		reqDTO.setType("frame");
+		
+		System.out.println(reqDTO);
+		return apiService.deleteFrameData(reqDTO);
 	}
 }

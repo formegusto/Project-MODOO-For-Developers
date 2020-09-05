@@ -14,4 +14,5 @@ public class RequestDTO {
 	private int seq;
 	private String type;
 	private List<String> data;
+	private Integer idx;
 }

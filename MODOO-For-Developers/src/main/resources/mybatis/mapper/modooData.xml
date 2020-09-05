@@ -7,6 +7,7 @@
 			SELECT data
 			FROM DATA
 			WHERE ISEQ=#{iseq}
+			ORDER BY dseq ASC;
 		</select>
 		<insert id="copyMdata">
 			INSERT INTO DATA(iseq, data)
@@ -20,4 +21,16 @@
 			INSERT INTO DATA(iseq, data)
 			VALUES (#{iseq}, #{data})
 		</insert>
+		<delete id="deleteMdata">
+			DELETE
+			FROM DATA
+			WHERE DSEQ IN
+			(
+				SELECT dseq FROM (
+					SELECT dseq
+					FROM DATA
+					WHERE ISEQ=#{iseq}
+					ORDER BY dseq ASC LIMIT #{idx}, 1 ) as d
+			)
+		</delete>
 	</mapper>
