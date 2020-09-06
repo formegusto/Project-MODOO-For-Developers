@@ -48,12 +48,17 @@ public class RestApiController {
 		return apiService.postFrameData(reqDTO);
 	}
 	
+	@DeleteMapping("/info")
+	@ResponseBody
+	public Map<String, Object> deleteInfo(RequestDTO reqDTO) {
+		reqDTO.setType("info");
+		return apiService.deleteInfoData(reqDTO);
+	}
+	
 	@DeleteMapping("/frame")
 	@ResponseBody
 	public Map<String, Object> deleteFrame(RequestDTO reqDTO) {
 		reqDTO.setType("frame");
-		
-		System.out.println(reqDTO);
 		return apiService.deleteFrameData(reqDTO);
 	}
 }

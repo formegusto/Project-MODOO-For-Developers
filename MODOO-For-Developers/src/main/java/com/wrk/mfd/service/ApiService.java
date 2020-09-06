@@ -229,7 +229,7 @@ public class ApiService {
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		// 파라미터 유효성 검사
-		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0 || reqDTO.getData().size() == 0) {
+		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0 || reqDTO.getData() == null) {
 			{
 				returnMap.put("result", 0);
 				returnMap.put("message", "잘못된 파라미터 입니다.");
@@ -326,7 +326,7 @@ public class ApiService {
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		// 파라미터 유효성 검사
-		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0 || reqDTO.getData().size() == 0) {
+		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0 || reqDTO.getData() == null) {
 			{
 				returnMap.put("result", 0);
 				returnMap.put("message", "잘못된 파라미터 입니다.");
@@ -415,6 +415,95 @@ public class ApiService {
 			idx++;
 		}
 		
+		
+		// 데이터 구성
+		{
+			returnMap.put("result", 1);
+			returnMap.put("message", "성공");
+		}
+		logService.insertLog(reqDTO, returnMap);
+		
+		return returnMap;
+	}
+	
+	public Map<String, Object> deleteInfoData(RequestDTO reqDTO) {
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		// 파라미터 유효성 검사
+		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0 || reqDTO.getIdx() == null) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "잘못된 파라미터 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// Request 요청 검사
+		RequestVO reqVO = new RequestVO();
+		reqVO.setMseq(reqDTO.getSeq());
+		reqVO.setType(reqDTO.getType());
+		
+		if(!reqRepository.checkReq(reqVO)) {
+			ModooInfo mivo = new ModooInfo();
+			mivo.setIseq(reqDTO.getSeq());
+			
+			mivo = minfoRepository.readMinfo(mivo);
+			if(mivo != null) {
+				reqVO.setTitle(mivo.getTitle());
+				reqRepository.createReq(reqVO);
+			}
+		} else {
+			reqRepository.increaseCnt(reqVO);
+		}
+		
+		// getApiKey 유효성 검사
+		if(!keyRepository.checkApikey(reqDTO.getApikey())) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "유효하지 않은 API Key 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// getUser
+		int user_id = keyRepository.readUserId(reqDTO.getApikey());
+		User findUser = new User();
+		findUser.setSeq(user_id);
+		findUser = userRepository.readUser(findUser);
+		
+		// SEQ 유효성 검사
+		ModooInfo minfo = new ModooInfo();
+		minfo.setIseq(reqDTO.getSeq());
+		if(minfoRepository.checkSeq(minfo)) {
+			minfo.setId(findUser.getModoo_id());
+			if(!minfoRepository.checkSeq(minfo)) {
+				{
+					returnMap.put("result", 0);
+					returnMap.put("message", "권한이 없는 INFO 입니다.");
+				}
+				logService.insertLog(reqDTO, returnMap);
+				return returnMap;
+			} else {
+				minfo = minfoRepository.readMinfo(minfo);
+			}
+		} else {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "존재하지 않는 INFO 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		Map<String,Object> payload = new HashMap<>();
+		{
+			payload.clear();
+			payload.put("iseq", reqDTO.getSeq());
+			payload.put("idx", reqDTO.getIdx());
+		}
+		mdataRepository.deleteMdata(payload);
 		
 		// 데이터 구성
 		{
