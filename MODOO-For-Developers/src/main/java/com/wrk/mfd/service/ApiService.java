@@ -608,6 +608,109 @@ public class ApiService {
 		return returnMap;
 	}
 	
+	public Map<String, Object> updateInfoData(RequestDTO reqDTO) {
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		// 파라미터 유효성 검사
+		if(reqDTO.getApikey() == null || reqDTO.getSeq() == 0 || reqDTO.getData() == null || reqDTO.getIdx() == null) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "잘못된 파라미터 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// Request 요청 검사
+		RequestVO reqVO = new RequestVO();
+		reqVO.setMseq(reqDTO.getSeq());
+		reqVO.setType(reqDTO.getType());
+				
+		if(!reqRepository.checkReq(reqVO)) {
+			ModooFrame mfvo = new ModooFrame();
+			mfvo.setFseq(reqDTO.getSeq());
+				
+			mfvo = mframeRepository.readMframe(mfvo);
+			if(mfvo != null) {
+				reqVO.setTitle(mfvo.getTitle());
+				reqRepository.createReq(reqVO);
+			}
+		} else {
+			reqRepository.increaseCnt(reqVO);
+		}
+		
+		// getApiKey 유효성 검사
+		if(!keyRepository.checkApikey(reqDTO.getApikey())) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "유효하지 않은 API Key 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// getUser
+		int user_id = keyRepository.readUserId(reqDTO.getApikey());
+		User findUser = new User();
+		findUser.setSeq(user_id);
+		findUser = userRepository.readUser(findUser);
+		
+		// SEQ 유효성 검사
+		ModooInfo minfo = new ModooInfo();
+		minfo.setIseq(reqDTO.getSeq());
+		if(minfoRepository.checkSeq(minfo)) {
+			minfo.setId(findUser.getModoo_id());
+			if(!minfoRepository.checkSeq(minfo)) {
+				{
+					returnMap.put("result", 0);
+					returnMap.put("message", "권한이 없는 INFO 입니다.");
+				}
+				logService.insertLog(reqDTO, returnMap);
+				return returnMap;
+			} else {
+				minfo = minfoRepository.readMinfo(minfo);
+			}
+		} else {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "존재하지 않는 INFO 입니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);
+			return returnMap;
+		}
+		
+		// 데이터 수정
+		// 데이터 개수 유효성 검사
+		if(reqDTO.getData().size() != 1) {
+			{
+				returnMap.put("result", 0);
+				returnMap.put("message", "데이터 개수가 맞지 않습니다.");
+			}
+			logService.insertLog(reqDTO, returnMap);	
+			return returnMap;
+		}
+		
+		Map<String, Object> payload = new HashMap<>();
+		if(!reqDTO.getData().get(0).equals("")){
+			{
+				payload.clear();
+				payload.put("data", reqDTO.getData().get(0));
+				payload.put("iseq", reqDTO.getSeq());
+				payload.put("idx", reqDTO.getIdx());
+			}
+			mdataRepository.updateMdata(payload);
+		}
+		
+		// 데이터 구성
+		{
+			returnMap.put("result", 1);
+			returnMap.put("message", "성공");
+		}
+		logService.insertLog(reqDTO, returnMap);
+		
+		return returnMap;
+	}
+	
 	public Map<String, Object> updateFrameData(RequestDTO reqDTO) {
 		Map<String, Object> returnMap = new HashMap<>();
 		
