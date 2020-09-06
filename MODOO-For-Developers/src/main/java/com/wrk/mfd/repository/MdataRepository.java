@@ -12,5 +12,6 @@ public interface MdataRepository {
 	public List<String> readMdata(ModooData vo);
 	public void copyMdata(Map<String, Object> payload);
 	public void postMdata(ModooData vo);
+	public void updateMdata(Map<String, Object> payload);
 	public void deleteMdata(Map<String, Object> payload);
 }

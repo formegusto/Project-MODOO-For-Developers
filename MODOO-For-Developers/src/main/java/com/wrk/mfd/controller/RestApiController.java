@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,5 +61,13 @@ public class RestApiController {
 	public Map<String, Object> deleteFrame(RequestDTO reqDTO) {
 		reqDTO.setType("frame");
 		return apiService.deleteFrameData(reqDTO);
+	}
+	
+	@PatchMapping("/frame")
+	@ResponseBody
+	public Map<String, Object> patchFrame(@RequestBody RequestDTO reqDTO) {
+		reqDTO.setType("frame");
+		System.out.println(reqDTO);
+		return apiService.updateFrameData(reqDTO);
 	}
 }

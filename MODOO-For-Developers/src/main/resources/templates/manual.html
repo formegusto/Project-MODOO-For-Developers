@@ -64,9 +64,9 @@
 						<td class="titleTd">INFO</td>
 						<td>
 							axios.get("http://MFD_URL"<br/>
-								+ "/api/info"<br/>
-								+ "?apikey={당신의 APIKEY}"<br/>
-								+ "?seq={조회하고자 하는 INFO 번호}"<br/>
+								&nbsp;+ "/api/info"<br/>
+								&nbsp;+ "?apikey={당신의 APIKEY}"<br/>
+								&nbsp;+ "&seq={조회하고자 하는 INFO 번호}"<br/>
 							)
 						</td>
 						<td>
@@ -81,9 +81,9 @@
 						<td class="titleTd">FRAME</td>
 						<td>
 							axios.get("http://MFD_URL"<br/>
-								+ "/api/frame"<br/>
-								+ "?apikey={당신의 APIKEY}"<br/>
-								+ "?seq={조회하고자 하는 FRAME 번호}"<br/>
+								&nbsp;+ "/api/frame"<br/>
+								&nbsp;+ "?apikey={당신의 APIKEY}"<br/>
+								&nbsp;+ "&seq={조회하고자 하는 FRAME 번호}"<br/>
 							)
 						</td>
 						<td>
@@ -122,7 +122,7 @@
 							&nbsp;"apikey":{당신의 APIKEY}<br/>
 							&nbsp;"seq":{넣고자하는 INFO 번호}<br/>
 							&nbsp;"data":["넣고자하는데이터배열"]<br/>
-							)
+							}
 						</td>
 						<td>
 							{<br/>
@@ -139,7 +139,7 @@
 							&nbsp;"apikey":{당신의 APIKEY}<br/>
 							&nbsp;"seq":{넣고자하는 FRAME 번호}<br/>
 							&nbsp;"data":["넣고자하는데이터배열"]<br/>
-							)
+							}
 						</td>
 						<td>
 							{<br/>
@@ -159,7 +159,51 @@
 	</div>
 	<div id="delete" class="divGrp">
 		<div class="divMem">
-			delete Manual
+			<table>
+				<thead>
+					<tr>
+						<td></td>
+						<td>request</td>
+						<td>response</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="titleTd">INFO</td>
+						<td>
+							axios.delete("http://MFD_URL"<br/>
+								&nbsp;+ "/api/info"<br/>
+								&nbsp;+ "?apikey={당신의 APIKEY}"<br/>
+								&nbsp;+ "&seq={지우고자 하는 데이터가 있는 INFO 번호}"<br/>
+								&nbsp;+ "&idx={지우고자 하는 데이터의 배열 인덱스}"<br/>
+							)
+						</td>
+						<td>
+							{<br/>
+							 &nbsp;result : "성공여부가 적혀있어요!"<br/>
+							 &nbsp;message : "실패 시 원인이 적혀있어요!"<br/>
+							}
+						</td>
+					</tr>
+					<tr>
+						<td class="titleTd">FRAME</td>
+						<td>
+							axios.delete("http://MFD_URL"<br/>
+								&nbsp;+ "/api/frame"<br/>
+								&nbsp;+ "?apikey={당신의 APIKEY}"<br/>
+								&nbsp;+ "&seq={지우고자 하는 데이터가 있는 FRAME 번호}"<br/>
+								&nbsp;+ "&idx={지우고자 하는 데이터의 배열 인덱스}"<br/>
+							)
+						</td>
+						<td>
+							{<br/>
+							 &nbsp;result : "성공여부가 적혀있어요!"<br/>
+							 &nbsp;message : "실패 시 원인이 적혀있어요!"<br/>
+							}
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

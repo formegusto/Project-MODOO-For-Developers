@@ -150,6 +150,7 @@ hr {
 	flex-flow: row;
 	justify-content: center;
 	flex-wrap: nowrap;
+	animation: fadeIn .7s forwards;
 }
 
 .divMem {
@@ -186,6 +187,7 @@ hr {
 
 .divMem td {
 	padding: 1rem;
+	box-shadow: .25rem .25rem .25rem .25rem gray;
 }
 
 .memNav {
