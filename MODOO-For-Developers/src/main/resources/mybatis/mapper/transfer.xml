@@ -19,13 +19,13 @@
 			SELECT *
 			FROM MFD_TRANSFER
 			WHERE REQUSER=#{requser}
-			ORDER BY createAt DESC LIMIT #{limit}
+			ORDER BY createAt DESC LIMIT #{start}, #{limit}
 		</select>
 		<select id="readOtherTrans" resultType="trans">
 			SELECT *
 			FROM MFD_TRANSFER
 			WHERE RESUSER=#{resuser}
-			ORDER BY createAt DESC LIMIT #{limit}
+			ORDER BY createAt DESC LIMIT #{start}, #{limit}
 		</select>
 		<update id="negativeReq">
 			UPDATE MFD_TRANSFER

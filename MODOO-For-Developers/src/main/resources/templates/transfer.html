@@ -82,8 +82,8 @@
 	</div>
 	<div class="divGrp">
 		<div class="divBtnGrp">
-			<button class="left">Prev</button>
-			<button class="right">Next</button>
+			<button class="left" th:style="${myPage == 1 ? 'opacity:0' : 'opacity:1'}" th:onclick="'location.href=\'/transfer?myPage=' + ${myPage - 1} + '&otherPage=' + ${otherPage} + '\''" th:disabled="${myPage == 1}">Prev</button>
+			<button class="right" th:style="${isMyLastPage ? 'opacity:0' : 'opacity:1'}" th:onclick="'location.href=\'/transfer?myPage=' + ${myPage + 1} + '&otherPage=' + ${otherPage} + '\''" th:disabled="${isMyLastPage}">Next</button>
 		</div>
 	</div>
 	<div class="divGrp">
@@ -125,8 +125,8 @@
 	</div>
 	<div class="divGrp">
 		<div class="divBtnGrp">
-			<button class="left">Prev</button>
-			<button class="right">Next</button>
+			<button class="left" th:style="${otherPage == 1 ? 'opacity:0' : 'opacity:1'}" th:onclick="'location.href=\'/transfer?myPage=' + ${myPage} + '&otherPage=' + ${otherPage - 1} + '\''" th:disabled="${otherPage == 1}">>Prev</button>
+			<button class="right" th:style="${isOtherLastPage ? 'opacity:0' : 'opacity:1'}" th:onclick="'location.href=\'/transfer?myPage=' + ${myPage} + '&otherPage=' + ${otherPage + 1} + '\''" th:disabled="${isOtherLastPage}">Next</button>
 		</div>
 	</div>
 </div>

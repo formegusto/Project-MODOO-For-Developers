@@ -116,6 +116,10 @@ public class ApiController {
 		User user = userService.readUser(userDetails);
 		Key key = keyService.getApikey(userDetails);
 		
+		if(page == 0) {
+			page = 1;
+		}
+		
 		Map<String, Object> payload = new HashMap<>();
 		{
 			payload.clear();
@@ -153,13 +157,22 @@ public class ApiController {
 	
 	@GetMapping("/transfer")
 	public String transfer(@AuthenticationPrincipal UserDetails userDetails,
-			Model model) {
+			Model model, @RequestParam(defaultValue = "1") int myPage,
+			@RequestParam(defaultValue = "1") int otherPage) {
 		User user = userService.readUser(userDetails);
+		
+		if(myPage == 0) {
+			myPage = 1;
+		}
+		if(otherPage == 0){
+			otherPage = 1;
+		}
 		
 		Map<String, Object> payload = new HashMap<>();
 		{
 			payload.clear();
 			payload.put("requser", user.getModoo_id());
+			payload.put("start", (myPage-1) * 5);
 			payload.put("limit", 5);
 		}
 		List<TransferVO> myReqList = transferRepository.readMyTrans(payload);
@@ -167,13 +180,50 @@ public class ApiController {
 		{
 			payload.clear();
 			payload.put("resuser", user.getModoo_id());
+			payload.put("start", (otherPage-1) * 5);
 			payload.put("limit", 5);
 		}
 		List<TransferVO> otherReqList = transferRepository.readOtherTrans(payload);
 		
+		Boolean isMyLastPage = false;
+		if(myReqList.size() < 5) {
+			isMyLastPage = true;
+		} else {
+			{
+				payload.clear();
+				payload.put("user_id", user.getModoo_id());
+				payload.put("start", (myPage) * 5);
+				payload.put("limit", 5);
+			}
+			List<TransferVO> tmpList = transferRepository.readMyTrans(payload);
+			if(tmpList.size() == 0) {
+				isMyLastPage = true;
+			}
+		}
+		
+		Boolean isOtherLastPage = false;
+		if(otherReqList.size() < 5) {
+			isOtherLastPage = true;
+		} else {
+			{
+				payload.clear();
+				payload.put("user_id", user.getModoo_id());
+				payload.put("start", (otherPage) * 5);
+				payload.put("limit", 5);
+			}
+			List<TransferVO> tmpList = transferRepository.readOtherTrans(payload);
+			if(tmpList.size() == 0) {
+				isOtherLastPage = true;
+			}
+		}
+		
 		model.addAttribute("myReqList", myReqList);
 		model.addAttribute("otherReqList", otherReqList);
 		model.addAttribute("user", user);
+		model.addAttribute("myPage", myPage);
+		model.addAttribute("otherPage", otherPage);
+		model.addAttribute("isMyLastPage", isMyLastPage);
+		model.addAttribute("isOtherLastPage", isOtherLastPage);
 		
 		return "/transfer";
 	}
