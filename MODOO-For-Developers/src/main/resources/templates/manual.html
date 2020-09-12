@@ -45,9 +45,6 @@
 				<li id="deleteNav" class="memNavMem" onclick="onChange('delete')">삭제</li>
 			</ul>
 		</div>
-		<div class="divMem">
-			본 문서는 React.js를 기준으로 작성되었습니다.
-		</div>
 	</div>
 	<div id="get" class="divGrp active">
 		<div class="divMem">
@@ -63,11 +60,10 @@
 					<tr>
 						<td class="titleTd">INFO</td>
 						<td>
-							axios.get("http://MFD_URL"<br/>
+							GET "http://MFD_URL"<br/>
 								&nbsp;+ "/api/info"<br/>
 								&nbsp;+ "?apikey={당신의 APIKEY}"<br/>
 								&nbsp;+ "&seq={조회하고자 하는 INFO 번호}"<br/>
-							)
 						</td>
 						<td>
 							{<br/>
@@ -80,11 +76,10 @@
 					<tr>
 						<td class="titleTd">FRAME</td>
 						<td>
-							axios.get("http://MFD_URL"<br/>
+							GET "http://MFD_URL"<br/>
 								&nbsp;+ "/api/frame"<br/>
 								&nbsp;+ "?apikey={당신의 APIKEY}"<br/>
 								&nbsp;+ "&seq={조회하고자 하는 FRAME 번호}"<br/>
-							)
 						</td>
 						<td>
 							{<br/>
@@ -117,8 +112,8 @@
 					<tr>
 						<td class="titleTd">INFO</td>
 						<td>
-							axios.post("http://MFD_URL/api/info",<br/>
-							{<br/>
+							POST "http://MFD_URL/api/info"<br/>
+							BODY {<br/>
 							&nbsp;"apikey":{당신의 APIKEY}<br/>
 							&nbsp;"seq":{넣고자하는 INFO 번호}<br/>
 							&nbsp;"data":["넣고자하는데이터배열"]<br/>
@@ -134,8 +129,8 @@
 					<tr>
 						<td class="titleTd">FRAME</td>
 						<td>
-							axios.post("http://MFD_URL/api/frame",<br/>
-							{<br/>
+							POST "http://MFD_URL/api/frame"<br/>
+							BODY {<br/>
 							&nbsp;"apikey":{당신의 APIKEY}<br/>
 							&nbsp;"seq":{넣고자하는 FRAME 번호}<br/>
 							&nbsp;"data":["넣고자하는데이터배열"]<br/>
@@ -154,7 +149,53 @@
 	</div>
 	<div id="update" class="divGrp">
 		<div class="divMem">
-			update Manual
+			<table>
+				<thead>
+					<tr>
+						<td></td>
+						<td>request</td>
+						<td>response</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="titleTd">INFO</td>
+						<td>
+							PUT "http://MFD_URL/api/info"<br/>
+							BODY {<br/>
+							&nbsp;"apikey":{당신의 APIKEY}<br/>
+							&nbsp;"seq":{넣고자하는 INFO 번호}<br/>
+							&nbsp;"idx":{수정하고자 하는 데이터 배열 번호}<br/>
+							&nbsp;"data":["수정하고자 하는 데이터배열"]<br/>
+							}
+						</td>
+						<td>
+							{<br/>
+							 &nbsp;result : "성공여부가 적혀있어요!"<br/>
+							 &nbsp;message : "실패 시 원인이 적혀있어요!"<br/>
+							}
+						</td>
+					</tr>
+					<tr>
+						<td class="titleTd">FRAME</td>
+						<td>
+							PATCH "http://MFD_URL/api/frame"<br/>
+							BODY {<br/>
+							&nbsp;"apikey":{당신의 APIKEY}<br/>
+							&nbsp;"seq":{넣고자하는 FRAME 번호}<br/>
+							&nbsp;"idx":{수정하고자 하는 데이터 배열 번호}<br/>
+							&nbsp;"data":["수정하고자 하는 데이터배열"]<br/>
+							}
+						</td>
+						<td>
+							{<br/>
+							 &nbsp;result : "성공여부가 적혀있어요!"<br/>
+							 &nbsp;message : "실패 시 원인이 적혀있어요!"<br/>
+							}
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div id="delete" class="divGrp">
@@ -171,12 +212,11 @@
 					<tr>
 						<td class="titleTd">INFO</td>
 						<td>
-							axios.delete("http://MFD_URL"<br/>
+							DELETE "http://MFD_URL"<br/>
 								&nbsp;+ "/api/info"<br/>
 								&nbsp;+ "?apikey={당신의 APIKEY}"<br/>
 								&nbsp;+ "&seq={지우고자 하는 데이터가 있는 INFO 번호}"<br/>
 								&nbsp;+ "&idx={지우고자 하는 데이터의 배열 인덱스}"<br/>
-							)
 						</td>
 						<td>
 							{<br/>
@@ -188,12 +228,11 @@
 					<tr>
 						<td class="titleTd">FRAME</td>
 						<td>
-							axios.delete("http://MFD_URL"<br/>
+							DELETE "http://MFD_URL"<br/>
 								&nbsp;+ "/api/frame"<br/>
 								&nbsp;+ "?apikey={당신의 APIKEY}"<br/>
 								&nbsp;+ "&seq={지우고자 하는 데이터가 있는 FRAME 번호}"<br/>
 								&nbsp;+ "&idx={지우고자 하는 데이터의 배열 인덱스}"<br/>
-							)
 						</td>
 						<td>
 							{<br/>

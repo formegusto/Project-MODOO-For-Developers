@@ -14,6 +14,11 @@
 				WHERE APIKEY=#{apikey}
 			) as chkkey
 		</select>
+		<update id="reissueKey">
+			UPDATE MFD_KEY
+			SET APIKEY=#{apikey}
+			WHERE USER_ID=#{user_id}
+		</update>
 		<select id="getApikey" resultType="key">
 			SELECT *
 			FROM MFD_KEY

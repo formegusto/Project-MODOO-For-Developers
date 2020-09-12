@@ -11,4 +11,5 @@ import com.wrk.mfd.entity.LogVO;
 public interface LogRepository {
 	public void insertLog(LogVO vo);
 	public List<LogVO> readLog(Map<String,Object> payload);
+	public void clearLog(LogVO vo);
 }

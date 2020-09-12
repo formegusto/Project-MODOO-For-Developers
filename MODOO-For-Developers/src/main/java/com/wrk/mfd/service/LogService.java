@@ -26,7 +26,7 @@ public class LogService {
 			log.setResult("SUCCESS");
 		}
 		log.setMessage((String) returnMap.get("message"));
-		
+		log.setMethod(reqDTO.getMethod());
 		log.setMseq(reqDTO.getSeq());
 		log.setApikey(reqDTO.getApikey());
 		log.setType(reqDTO.getType());

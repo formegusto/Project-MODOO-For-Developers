@@ -40,7 +40,7 @@
 			<table>
 				<thead>
 					<tr>
-						<td colspan="6" class="tableHeader">
+						<td colspan="7" class="tableHeader">
 							LOG
 						</td>
 					</tr>
@@ -49,6 +49,7 @@
 						<td>Result</td>
 						<td>Message</td>
 						<td>APIKEY</td>
+						<td>METHOD</td>
 						<td>TYPE</td>
 						<td>SEQ</td>
 					</tr>
@@ -59,6 +60,7 @@
 						<td th:text="${log.result}" th:style="${log.result == 'FAIL' ? 'color:red' : 'color:blue'}"></td>
 						<td th:text="${log.message}"></td>
 						<td th:text="${log.apikey}"></td>
+						<td th:text="${log.method}"></td>
 						<td th:text="${log.type}"></td>
 						<td th:text="${log.mseq}"></td>
 					</tr>

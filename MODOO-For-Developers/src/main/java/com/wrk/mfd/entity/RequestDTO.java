@@ -15,4 +15,5 @@ public class RequestDTO {
 	private String type;
 	private List<String> data;
 	private Integer idx;
+	private String method;
 }

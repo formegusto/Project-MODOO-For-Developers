@@ -14,6 +14,7 @@ public class LogVO {
 	private String result;
 	private String message;
 	private int mseq;
+	private String method;
 	private String apikey;
 	private String type;
 	private Date createAt;

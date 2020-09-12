@@ -4,11 +4,11 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="com.wrk.mfd.repository.LogRepository">
 		<insert id="insertLog">
-			INSERT INTO MFD_LOG (result, message, mseq, apikey, type)
-			VALUES(#{result}, #{message}, #{mseq}, #{apikey}, #{type})
+			INSERT INTO MFD_LOG (result, message, mseq, apikey, method,type)
+			VALUES(#{result}, #{message}, #{mseq}, #{apikey}, #{method},#{type})
 		</insert>
 		<select id="readLog" resultType="log">
-			SELECT apikey, result, message, createAt, type, mseq
+			SELECT apikey, result, message, createAt, type, method, mseq
 			FROM (
 				SELECT *
 				FROM MFD_LOG
@@ -22,7 +22,7 @@
 			ON I.ISEQ = ML.MSEQ
 			WHERE I.ISEQ != 0 OR APIKEY = #{apikey}
 			UNION ALL
-			SELECT apikey, result, message, createAt, type, mseq
+			SELECT apikey, result, message, createAt, type, method, mseq
 			FROM (
 				SELECT *
 				FROM MFD_LOG
@@ -37,4 +37,9 @@
 			WHERE F.FSEQ != 0 OR APIKEY = #{apikey}
 			ORDER BY createAt DESC LIMIT #{start}, #{limit}
 		</select>
+		<delete id="clearLog">
+			DELETE
+			FROM MFD_LOG
+			WHERE APIKEY=#{apikey}
+		</delete>
 	</mapper>

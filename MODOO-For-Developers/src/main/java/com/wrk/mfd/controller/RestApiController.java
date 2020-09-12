@@ -26,6 +26,7 @@ public class RestApiController {
 	@ResponseBody
 	public Map<String, Object> readInfo(RequestDTO reqDTO) {
 		reqDTO.setType("info");
+		reqDTO.setMethod("GET");
 		return apiService.readInfoData(reqDTO);
 	}
 	
@@ -33,6 +34,7 @@ public class RestApiController {
 	@ResponseBody
 	public Map<String, Object> readFrame(RequestDTO reqDTO) {
 		reqDTO.setType("frame");
+		reqDTO.setMethod("GET");
 		return apiService.readFrameData(reqDTO);
 	}
 	
@@ -40,6 +42,7 @@ public class RestApiController {
 	@ResponseBody
 	public Map<String, Object> postInfo(@RequestBody RequestDTO reqDTO) {
 		reqDTO.setType("info");
+		reqDTO.setMethod("POST");
 		return apiService.postInfoData(reqDTO);
 	}
 	
@@ -47,6 +50,7 @@ public class RestApiController {
 	@ResponseBody
 	public Map<String, Object> postFrame(@RequestBody RequestDTO reqDTO){
 		reqDTO.setType("frame");
+		reqDTO.setMethod("POST");
 		return apiService.postFrameData(reqDTO);
 	}
 	
@@ -54,6 +58,7 @@ public class RestApiController {
 	@ResponseBody
 	public Map<String, Object> deleteInfo(RequestDTO reqDTO) {
 		reqDTO.setType("info");
+		reqDTO.setMethod("DELETE");
 		return apiService.deleteInfoData(reqDTO);
 	}
 	
@@ -61,6 +66,7 @@ public class RestApiController {
 	@ResponseBody
 	public Map<String, Object> deleteFrame(RequestDTO reqDTO) {
 		reqDTO.setType("frame");
+		reqDTO.setMethod("DELETE");
 		return apiService.deleteFrameData(reqDTO);
 	}
 	
@@ -68,6 +74,7 @@ public class RestApiController {
 	@ResponseBody
 	public Map<String, Object> putInfo(@RequestBody RequestDTO reqDTO){
 		reqDTO.setType("info");
+		reqDTO.setMethod("PUT");
 		return apiService.updateInfoData(reqDTO);
 	}
 	
@@ -75,7 +82,7 @@ public class RestApiController {
 	@ResponseBody
 	public Map<String, Object> patchFrame(@RequestBody RequestDTO reqDTO) {
 		reqDTO.setType("frame");
-		System.out.println(reqDTO);
+		reqDTO.setMethod("PATCH");
 		return apiService.updateFrameData(reqDTO);
 	}
 }

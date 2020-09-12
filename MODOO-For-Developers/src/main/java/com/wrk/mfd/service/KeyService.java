@@ -14,9 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.wrk.mfd.entity.Key;
+import com.wrk.mfd.entity.LogVO;
 import com.wrk.mfd.entity.ModooUser;
 import com.wrk.mfd.entity.User;
 import com.wrk.mfd.repository.KeyRepository;
+import com.wrk.mfd.repository.LogRepository;
 import com.wrk.mfd.repository.UserRepository;
 
 @Service
@@ -25,6 +27,8 @@ public class KeyService {
 	private UserService userService;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private LogRepository logRepository;
 	@Autowired
 	private KeyRepository keyRepository;
 	
@@ -54,6 +58,26 @@ public class KeyService {
 		
 		Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
 		SecurityContextHolder.getContext().setAuthentication(newAuth);
+	}
+	
+	public void reIssueApiKey(UserDetails userDetails) {
+		User user = userService.readUser(userDetails);
+		
+		Key kvo = new Key();
+		kvo.setUser_id(user.getSeq());
+		
+		Key removeKey = keyRepository.getApikey(kvo);
+		LogVO log = new LogVO();
+		log.setApikey(removeKey.getApikey());
+		logRepository.clearLog(log);
+		
+		String apikey = "";
+		do {
+			apikey = RandomStringUtils.random(32, true, true);
+		} while(keyRepository.checkApikey(apikey));
+		kvo.setApikey(apikey);
+		
+		keyRepository.reissueKey(kvo);
 	}
 	
 	public Key getApikey(UserDetails userDetails) {

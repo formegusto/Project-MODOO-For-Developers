@@ -4,9 +4,22 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" th:href="@{/static/css/main.css}" type="text/css"></link>
+<script type="text/javascript" th:src="@{/static/js/main.js}"></script>
 <title>MODOO For Developers</title>
 </head>
 <body>
+<div class="reIssueDiv">
+	<div class="riMem">
+		APIKEY 재 발급 시,<br/>관련 로그들은 모두 삭제됩니다.
+	</div>
+	<hr/>
+	<div class="riMem">
+		<div class="btnGrp">
+			<button type="button" onclick="location.href='/user/reissueKey'">재발급</button>
+			<button type="button" onclick="onApiReIss('cancle')">취소</button>
+		</div>
+	</div>
+</div>
 <div class="sidebar">
 	<div class="logobox">
 		<div class="logoForm">
@@ -44,7 +57,7 @@
 				<div class="apikeyContent">
 					<span th:text="${key.apikey}"></span>
 				</div>
-				<button class="apikeyBtn">재발급</button>
+				<button class="apikeyBtn" onclick="onApiReIss('active')">재발급</button>
 			</div>
 			
 		</div>
